@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }, // In production, hash this!
+  password: { type: String, required: true },
   age: { type: Number },
-  weight: { type: Number }, // in kg
-  height: { type: Number }, // in cm
+  weight: { type: Number },
+  height: { type: Number },
   healthGoals: {
     type: String,
     enum: ["weight-loss", "muscle-gain", "maintenance"],

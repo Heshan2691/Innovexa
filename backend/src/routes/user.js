@@ -1,24 +1,20 @@
 import { Router } from "express";
 import User from "../models/User.js";
+import { registerUser, loginUser } from "../controllers/authController.js";
+import { authMiddleware } from "../middleware/authMiddleware.js";
 
 const router = Router();
 
-// Create a new user (POST /api/users)
-router.post("/", async (req, res) => {
-  try {
-    const user = new User(req.body);
-    await user.save();
-    res.status(201).json(user);
-  } catch (error) {
-    console.error("Error creating user:", error);
-    res.status(400).json({ message: "Error creating user", error });
-  }
-});
+// Register a new user (POST /api/users/register)
+router.post("/register", registerUser);
 
-// Read all users (GET /api/users)
-router.get("/", async (req, res) => {
+// Login a user (POST /api/users/login)
+router.post("/login", loginUser);
+
+// Get all users (GET /api/users) - Protected
+router.get("/", authMiddleware, async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find().select("-password");
     res.json(users);
   } catch (error) {
     console.error("Error fetching users:", error);
@@ -26,11 +22,13 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Read a single user by ID (GET /api/users/:id)
-router.get("/:id", async (req, res) => {
+// Get a user by ID (GET /api/users/:id) - Protected
+router.get("/:id", authMiddleware, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ message: "User not found" });
+    const user = await User.findById(req.params.id).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
     res.json(user);
   } catch (error) {
     console.error("Error fetching user:", error);
@@ -38,25 +36,45 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Update a user by ID (PUT /api/users/:id)
-router.put("/:id", async (req, res) => {
+// Update a user by ID (PUT /api/users/:id) - Protected
+router.put("/:id", authMiddleware, async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (user._id.toString() !== req.user.id) {
+      return res
+        .status(403)
+        .json({ message: "Not authorized to update this user" });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-    });
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.json(user);
+    }).select("-password");
+    res.json(updatedUser);
   } catch (error) {
     console.error("Error updating user:", error);
     res.status(400).json({ message: "Error updating user", error });
   }
 });
 
-// Delete a user by ID (DELETE /api/users/:id)
-router.delete("/:id", async (req, res) => {
+// Delete a user by ID (DELETE /api/users/:id) - Protected
+router.delete("/:id", authMiddleware, async (req, res) => {
   try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) return res.status(404).json({ message: "User not found" });
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (user._id.toString() !== req.user.id) {
+      return res
+        .status(403)
+        .json({ message: "Not authorized to delete this user" });
+    }
+
+    await User.findByIdAndDelete(req.params.id);
     res.json({ message: "User deleted" });
   } catch (error) {
     console.error("Error deleting user:", error);
