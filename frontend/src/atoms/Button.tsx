@@ -1,13 +1,14 @@
-// Button.tsx
+// components/Button.tsx
 "use client";
 
 import React from 'react';
 import styled from 'styled-components';
-import { colors } from '../styles/colors'; // Import the colors from your styles/colors.ts
+import { colors } from '../styles/colors';
+import { fonts } from '../styles/fonts';
 
 // Define the props for the Button component
 interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'tertiary'; // Updated variant names
+  variant?: 'primary' | 'secondary' | 'tertiary';
   size?: 'small' | 'medium' | 'large';
   children: React.ReactNode;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -20,9 +21,9 @@ const StyledButton = styled.button<ButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50px;
-  font-family: 'Arial', sans-serif;
-  font-weight: 500;
+  border-radius: 10px;
+  font-family: ${fonts.poppins.family};
+  font-weight: ${fonts.poppins.weights.medium};
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
@@ -61,8 +62,8 @@ const StyledButton = styled.button<ButtonProps>`
     switch (variant) {
       case 'primary':
         return `
-          border:  ${colors.secondary};
-          background:${colors.secondary};
+          border: 2px solid ${colors.secondary};
+          background: ${colors.secondary};
           color: ${colors.brightWhite};
           
           &:hover {
@@ -84,13 +85,13 @@ const StyledButton = styled.button<ButtonProps>`
           color: ${colors.brightWhite};
           
           &:hover {
-            border-color: 1px solid ${colors.cloudWhite};
+            border: 1px solid ${colors.cloudWhite};
             background: transparent;
             color: ${colors.brightWhite};
           }
           
           &:active {
-            border-color: 1px solid ${colors.tertiary};
+            border: 1px solid ${colors.tertiary};
             background: transparent;
             color: ${colors.brightWhite};
           }
