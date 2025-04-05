@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const dietPlanSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // Reference to the user
-  date: { type: Date, required: true }, // Date of the diet plan
-  meals: [{ type: mongoose.Schema.Types.ObjectId, ref: "Meal" }], // Array of meal references
-  totalCalories: { type: Number, default: 0 }, // Sum of calories from meals
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // Changed from 'user' to 'userId'
+  date: { type: Date, required: true },
+  meals: [{ type: mongoose.Schema.Types.ObjectId, ref: "Meal" }],
+  totalCalories: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
 });
 
