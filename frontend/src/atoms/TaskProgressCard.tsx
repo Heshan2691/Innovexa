@@ -1,6 +1,7 @@
 // components/TaskProgressCard.tsx
 "use client"
 
+
 import type React from "react"
 import styled from "styled-components"
 import { colors } from "../styles/colors"
@@ -8,6 +9,7 @@ import { fonts } from "../styles/fonts"
 
 // Styled components for the Task Card
 const CardContainer = styled.div`
+
   background-color: ${colors.brightWhite};
   border-radius: 24px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
@@ -16,6 +18,7 @@ const CardContainer = styled.div`
   max-width: 320px;
   position: relative;
   display: flex;
+
   justify-content: space-between;
   align-items: center;
 `
@@ -160,4 +163,5 @@ const TaskCard: React.FC<TaskCardProps> = ({
 }
 
 export default TaskCard
+
 

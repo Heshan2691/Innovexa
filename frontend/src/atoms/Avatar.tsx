@@ -1,3 +1,4 @@
+
 "use client"
 
 import type React from "react"
@@ -13,10 +14,12 @@ interface AvatarProps {
 }
 
 const AvatarContainer = styled.div<AvatarProps>`
+
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+
   background-color: ${(props) => props.backgroundColor || colors.secondary};
   color: ${(props) => props.textColor || colors.brightWhite};
   font-family: ${fonts.poppins.family};
@@ -56,4 +59,5 @@ const Avatar: React.FC<AvatarProps> = ({ children, size = "medium", backgroundCo
 }
 
 export default Avatar
+
 

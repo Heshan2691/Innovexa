@@ -1,5 +1,6 @@
 "use client"
 
+
 import type React from "react"
 import styled from "styled-components"
 import { colors } from "../styles/colors"
@@ -7,21 +8,22 @@ import { fonts } from "../styles/fonts"
 import Button from "../atoms/Button"
 import TaskCard from "../atoms/TaskProgressCard"
 
-// Define props for the Sidebar component
+
 interface SidebarProps {
+
   height?: string // e.g., "178cm"
   weight?: string // e.g., "70kg"
   userName?: string
   membershipStatus?: string
   avatarContent?: string
   isOnline?: boolean
+
 }
 
-// Styled components for the Sidebar
 const SidebarContainer = styled.div`
-  width: 319px; // Specified width
+  width: 319px;
   height: 100vh;
-  background-color: ${colors.primary}; // Midnight Blue (#2A3E72)
+  background-color: ${colors.primary};
   color: ${colors.brightWhite};
   display: flex;
   flex-direction: column;
@@ -83,6 +85,7 @@ const ProfileSection = styled.div`
   margin-bottom: 24px;
 `
 
+
 const AvatarContainer = styled.div`
   position: relative;
   margin-bottom: 16px;
@@ -108,6 +111,7 @@ const OnlineIndicator = styled.div`
   border: 2px solid ${colors.primary};
   border-radius: 50%;
 `
+
 
 const UserName = styled.div`
   font-size: 18px;
@@ -157,7 +161,9 @@ const NavSection = styled.div`
 `
 
 const NavButton = styled(Button)`
+
   width: 100%;
+
   height: 48px;
   justify-content: flex-start;
   padding-left: 20px;
@@ -172,13 +178,14 @@ const NavButton = styled(Button)`
   }
 `
 
+
 const LogOutButton = styled(NavButton)`
   margin-top: 24px;
 `
 
-// Sidebar component
+
 const Sidebar: React.FC<SidebarProps> = ({
-  height = "178cm", // Default values
+  height = "178cm",
   weight = "70kg",
   userName = "John Doe",
   membershipStatus = "Premium Member",
@@ -191,6 +198,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <SidebarContainer>
+
       {/* Logo */}
       <LogoContainer>
         <LogoText>
@@ -208,6 +216,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         </AvatarContainer>
         <UserName>{userName}</UserName>
         <MembershipStatus>{membershipStatus}</MembershipStatus>
+
         <Stats>
           <StatItem>
             <Dot color="#06B6D4" /> Weight {height}
@@ -218,12 +227,14 @@ const Sidebar: React.FC<SidebarProps> = ({
         </Stats>
       </ProfileSection>
 
+
       {/* Task Progress Card */}
       <TaskCardContainer>
         <TaskCard progress={85} taskText="Your today's task almost done!" buttonText="View Task" showLabel={false} />
       </TaskCardContainer>
 
       {/* Navigation Buttons */}
+
       <NavSection>
         <NavButton variant="secondary" size="medium" onClick={() => handleNavClick("Dashboard")}>
           <span style={{ color: "#06B6D4" }}>⚡</span> Dashboard
@@ -247,11 +258,13 @@ const Sidebar: React.FC<SidebarProps> = ({
           <span style={{ color: "#06B6D4" }}>📅</span> Plan Your Diet
         </NavButton>
 
+
         {/* Log Out Button */}
         <LogOutButton variant="secondary" size="medium" onClick={() => handleNavClick("Log Out")}>
           <span style={{ color: "#06B6D4" }}>←</span> Log Out
         </LogOutButton>
       </NavSection>
+
     </SidebarContainer>
   )
 }
