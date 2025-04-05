@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { colors } from '../styles/colors';
 import { fonts } from '../styles/fonts';
 
-// Define the props for the Button component
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'tertiary';
   size?: 'small' | 'medium' | 'large';
@@ -15,9 +14,7 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-// Styled button component with dynamic styles based on props
 const StyledButton = styled.button<ButtonProps>`
-  // Base styles
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +24,6 @@ const StyledButton = styled.button<ButtonProps>`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
-  // Size styles
   ${({ size }) => {
     switch (size) {
       case 'small':
@@ -57,7 +53,6 @@ const StyledButton = styled.button<ButtonProps>`
     }
   }}
 
-  // Variant styles
   ${({ variant }) => {
     switch (variant) {
       case 'primary':
@@ -131,7 +126,6 @@ const StyledButton = styled.button<ButtonProps>`
     }
   }}
 
-  // Disabled state
   ${({ disabled }) =>
     disabled &&
     `
@@ -140,7 +134,6 @@ const StyledButton = styled.button<ButtonProps>`
     `}
 `;
 
-// Button component
 const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   size = 'medium',

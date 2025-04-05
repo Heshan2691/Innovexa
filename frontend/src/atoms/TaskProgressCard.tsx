@@ -5,84 +5,58 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../styles/colors';
 import { fonts } from '../styles/fonts';
-import Button from './Button';
 
-// Styled components for the TaskProgressCard
-const CardContainer = styled.div`
+const Card = styled.div`
+  width: 230px;
+  height: 100px;
   background-color: ${colors.brightWhite};
   border-radius: 10px;
   padding: 15px;
   display: flex;
-  flex-direction: row; // Changed to row for horizontal alignment
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
-  gap: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `;
 
-const TaskText = styled.div`
+const Title = styled.div`
   font-family: ${fonts.poppins.family};
-  font-weight: ${fonts.poppins.weights.regular};
+  font-weight: ${fonts.poppins.weights.medium};
   font-size: 14px;
   color: ${colors.deepSlate};
-  flex: 1; // Allow text to take available space
 `;
 
-const ProgressCircle = styled.div`
-  width: 40px; // Reduced size to better fit the design
-  height: 40px;
-  border-radius: 50%;
-  background: conic-gradient(${colors.secondary} 0% 85%, ${colors.steelGray} 85% 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px; // Reduced font size for smaller circle
-  font-weight: ${fonts.poppins.weights.bold};
-  color: ${colors.deepSlate};
-  position: relative;
+const ProgressBar = styled.div`
+  width: 100%;
+  height: 10px;
+  background-color: ${colors.cloudWhite};
+  border-radius: 5px;
+  overflow: hidden;
+`;
 
-  &:before {
-    content: '';
-    position: absolute;
-    width: 32px; // Adjusted for smaller circle
-    height: 32px;
-    border-radius: 50%;
-    background-color: ${colors.brightWhite};
-  }
+const Progress = styled.div`
+  width: 70%; // Example progress
+  height: 100%;
+  background-color: ${colors.secondary};
+  border-radius: 5px;
 `;
 
 const ProgressText = styled.div`
-  position: relative;
-  z-index: 1;
+  font-family: ${fonts.poppins.family};
+  font-weight: ${fonts.poppins.weights.regular};
+  font-size: 12px;
+  color: ${colors.steelGray};
+  text-align: right;
 `;
 
-const StyledButton = styled(Button)`
-  width: 100px; // Adjusted to fit the design
-  height: 32px; // Adjusted to fit the design
-  font-size: 12px; // Smaller font size for better fit
-`;
-
-// TaskProgressCard component
 const TaskProgressCard: React.FC = () => {
-  const handleViewTask = () => {
-    console.log('View Task clicked');
-  };
-
   return (
-    <CardContainer>
-      <TaskText>Your today’s task almost done!</TaskText>
-      <ProgressCircle>
-        <ProgressText>85%</ProgressText>
-      </ProgressCircle>
-      <StyledButton
-        variant="secondary"
-        size="medium"
-        onClick={handleViewTask}
-      >
-        View Task
-      </StyledButton>
-    </CardContainer>
+    <Card>
+      <Title>Daily Task Progress</Title>
+      <ProgressBar>
+        <Progress />
+      </ProgressBar>
+      <ProgressText>70% Completed</ProgressText>
+    </Card>
   );
 };
 

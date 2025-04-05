@@ -5,20 +5,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../styles/colors';
 import { fonts } from '../styles/fonts';
+import Avatar from '../atoms/Avatar';
 import Button from '../atoms/Button';
 import TaskProgressCard from '../atoms/TaskProgressCard';
 
-// Define props for the Sidebar component
 interface SidebarProps {
-  height?: string; // e.g., "178cm"
-  weight?: string; // e.g., "70kg"
+  height?: string;
+  weight?: string;
 }
 
-// Styled components for the Sidebar
 const SidebarContainer = styled.div`
-  width: 319px; // Specified width
+  width: 319px;
   height: 100vh;
-  background-color: ${colors.primary}; // Midnight Blue (#2A3E72)
+  background-color: ${colors.primary};
   color: ${colors.brightWhite};
   display: flex;
   flex-direction: column;
@@ -37,18 +36,6 @@ const ProfileSection = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 30px;
-`;
-
-const Avatar = styled.div`
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: #d3b7ff; // Light purple background for the avatar
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-  margin-bottom: 10px;
 `;
 
 const UserName = styled.div`
@@ -92,25 +79,24 @@ const NavSection = styled.div`
 `;
 
 const NavButton = styled(Button)`
-  width: 230px; // Specified width
-  height: 48px; // Specified height (already default for medium size)
+  width: 230px;
+  height: 48px;
   justify-content: flex-start;
   padding-left: 15px;
   gap: 10px;
 `;
 
 const LogOutButton = styled(Button)`
-  width: 230px; // Specified width
-  height: 48px; // Specified height
+  width: 230px;
+  height: 48px;
   justify-content: flex-start;
   padding-left: 15px;
   gap: 10px;
-  margin-top: auto; // Push to the bottom
+  margin-top: auto;
 `;
 
-// Sidebar component
 const Sidebar: React.FC<SidebarProps> = ({
-  height = "178cm", // Default values
+  height = "178cm",
   weight = "70kg",
 }) => {
   const handleNavClick = (section: string) => {
@@ -119,12 +105,14 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <SidebarContainer>
-      {/* Logo */}
       <Logo>FOOD LENS</Logo>
-
-      {/* Profile Section */}
       <ProfileSection>
-        <Avatar>😊</Avatar>
+        <Avatar
+          variant="emoji"
+          size="xl"
+          content="😊"
+          isOnline={true}
+        />
         <UserName>John Doe</UserName>
         <MembershipStatus>Premium Member</MembershipStatus>
         <Stats>
@@ -136,11 +124,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           </StatItem>
         </Stats>
       </ProfileSection>
-
-      {/* Task Progress Card */}
       <TaskProgressCard />
-
-      {/* Navigation Buttons */}
       <NavSection>
         <NavButton
           variant="secondary"
@@ -192,8 +176,6 @@ const Sidebar: React.FC<SidebarProps> = ({
           📅 Plan Your Diet
         </NavButton>
       </NavSection>
-
-      {/* Log Out Button */}
       <LogOutButton
         variant="secondary"
         size="medium"
