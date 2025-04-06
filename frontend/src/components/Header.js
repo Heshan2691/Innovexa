@@ -53,6 +53,12 @@ export default function Header() {
           Diet Planner
         </Link>
         <Link
+          href="/meal-ideas"
+          style={{ color: "#fff", textDecoration: "none", marginRight: "20px" }}
+        >
+          Meal Ideas
+        </Link>
+        <Link
           href="/profile"
           style={{ color: "#fff", margin: "0 15px", textDecoration: "none" }}
         >

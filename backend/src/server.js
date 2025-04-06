@@ -6,6 +6,7 @@ import userRouter from "./routes/user.js"; // Add user routes
 import mealRouter from "./routes/meal.js"; // Add meal routes
 import dietPlanRouter from "./routes/dietPlan.js"; // Add diet plan routes
 import connectDB from "./config/db.js";
+import recipeRoutes from "./routes/recipeRoutes.js";
 
 // Load environment variables
 dotenv.config();
@@ -26,6 +27,7 @@ app.use("/api/health-tips", healthTipsRouter);
 app.use("/api/users", userRouter); // Mount user routes
 app.use("/api/meals", mealRouter); // Mount meal routes
 app.use("/api/diet-plans", dietPlanRouter); // Mount diet plan routes
+app.use("/api/recipes", recipeRoutes); // Mount recipe routes
 
 // Connect to MongoDB and start the server
 const PORT = process.env.PORT || 5000;
