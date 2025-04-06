@@ -5,6 +5,8 @@ import axios from "axios";
 
 export default function DietPlanner() {
   const [date, setDate] = useState("");
+  const [diet, setDiet] = useState(""); // e.g., "vegan", "gluten free"
+  const [exclude, setExclude] = useState(""); // e.g., "peanuts"
   const [dietPlan, setDietPlan] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -20,7 +22,7 @@ export default function DietPlanner() {
       }
       const response = await axios.post(
         "http://localhost:5000/api/diet-plans/generate",
-        { date },
+        { date, diet, exclude },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setDietPlan(response.data);
@@ -53,6 +55,46 @@ export default function DietPlanner() {
               padding: "8px",
               border: "1px solid #ccc",
               borderRadius: "4px",
+            }}
+          />
+        </div>
+        <div style={{ marginBottom: "15px" }}>
+          <label style={{ display: "block", marginBottom: "5px" }}>
+            Dietary Preference (optional):
+          </label>
+          <select
+            value={diet}
+            onChange={(e) => setDiet(e.target.value)}
+            style={{
+              padding: "8px",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              width: "200px",
+            }}
+          >
+            <option value="">None</option>
+            <option value="vegan">Vegan</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="gluten free">Gluten Free</option>
+            <option value="ketogenic">Ketogenic</option>
+            <option value="lowcarb">Low Carb</option>
+            <option value="highprotein">High Protein</option>
+          </select>
+        </div>
+        <div style={{ marginBottom: "15px" }}>
+          <label style={{ display: "block", marginBottom: "5px" }}>
+            Exclude Ingredients (optional, comma-separated):
+          </label>
+          <input
+            type="text"
+            value={exclude}
+            onChange={(e) => setExclude(e.target.value)}
+            placeholder="e.g., peanuts, shellfish"
+            style={{
+              padding: "8px",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              width: "200px",
             }}
           />
         </div>
@@ -103,6 +145,20 @@ export default function DietPlanner() {
                   <br />
                   Protein: {meal.protein}g, Carbs: {meal.carbs}g, Fats:{" "}
                   {meal.fats}g
+                  <br />
+                  Source: {meal.source}
+                  {meal.sourceUrl && (
+                    <div>
+                      <a
+                        href={meal.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "#333", textDecoration: "underline" }}
+                      >
+                        View Full Recipe
+                      </a>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
