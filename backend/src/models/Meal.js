@@ -7,8 +7,9 @@ const mealSchema = new mongoose.Schema({
   protein: { type: Number, default: 0 },
   carbs: { type: Number, default: 0 },
   fats: { type: Number, default: 0 },
-  source: { type: String, default: "User" }, // e.g., "Spoonacular" or "User"
-  sourceUrl: { type: String }, // URL to the full recipe (optional)
+  source: { type: String, default: "User" },
+  sourceUrl: { type: String },
+  imageUrl: { type: String }, // New field to store the image URL
 });
 
 export default mongoose.model("Meal", mealSchema);
