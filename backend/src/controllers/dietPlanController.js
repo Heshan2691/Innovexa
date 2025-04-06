@@ -49,6 +49,7 @@ const generateSingleDayPlan = async (
       }
     );
 
+
     console.log(
       "Spoonacular API Response:",
       JSON.stringify(spoonacularResponse.data, null, 2)
@@ -89,11 +90,14 @@ const generateSingleDayPlan = async (
       idealMacros = { protein: 30, carbs: 40, fats: 30 };
     }
 
+
     const scoredMeals = meals.map((meal) => {
+
       const proteinCalories = (meal.protein || 0) * 4;
       const carbsCalories = (meal.carbs || 0) * 4;
       const fatsCalories = (meal.fats || 0) * 9;
       const totalMacroCalories = proteinCalories + carbsCalories + fatsCalories;
+
 
       const proteinPercent =
         totalMacroCalories > 0
@@ -104,11 +108,15 @@ const generateSingleDayPlan = async (
       const fatsPercent =
         totalMacroCalories > 0 ? (fatsCalories / totalMacroCalories) * 100 : 0;
 
+
+
       const proteinDiff = Math.abs(proteinPercent - idealMacros.protein);
       const carbsDiff = Math.abs(carbsPercent - idealMacros.carbs);
       const fatsDiff = Math.abs(fatsPercent - idealMacros.fats);
       const totalDiff = proteinDiff + carbsDiff + fatsDiff;
+
       const score = Math.max(0, 100 - totalDiff);
+
 
       return { meal, score };
     });
@@ -116,6 +124,7 @@ const generateSingleDayPlan = async (
     scoredMeals.sort((a, b) => b.score - a.score);
 
     const selectedMeals = [];
+
     let currentCalories = 0;
     for (const { meal } of scoredMeals) {
       if (currentCalories + meal.calories <= targetCalories) {
@@ -126,7 +135,9 @@ const generateSingleDayPlan = async (
     }
 
     if (selectedMeals.length === 0) {
+
       throw new Error("No suitable meals found within calorie target");
+
     }
 
     return {
