@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import MacroCircles from "../../components/MacroCircles";
+import api from "../../utils/api";
 
 export default function Dashboard() {
   const [meals, setMeals] = useState([]);
@@ -23,12 +24,7 @@ export default function Dashboard() {
         // Fetch user profile
         const decodedToken = JSON.parse(atob(token.split(".")[1]));
         const userId = decodedToken.id;
-        const userResponse = await axios.get(
-          `http://localhost:5000/api/users/${userId}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const userResponse = await api.get(`/users/${userId}`)
         setUser(userResponse.data);
 
         // Fetch meals
