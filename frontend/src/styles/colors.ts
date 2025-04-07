@@ -6,4 +6,5 @@ export const colors = {
     steelGray: '#6B7280',
     cloudWhite: '#F9FAFB',
     brightWhite: '#FFFFFF',
+    lightBlue:  '#17A2B8', // Light Blue
   } as const;

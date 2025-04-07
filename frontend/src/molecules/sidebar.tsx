@@ -1,28 +1,25 @@
 "use client"
 
-
 import type React from "react"
+import Image from "next/image"
 import styled from "styled-components"
 import { colors } from "../styles/colors"
 import { fonts } from "../styles/fonts"
 import Button from "../atoms/Button"
-import TaskCard from "../atoms/TaskProgressCard"
 
 
 interface SidebarProps {
-
-  height?: string // e.g., "178cm"
-  weight?: string // e.g., "70kg"
+  height?: string
+  weight?: string
   userName?: string
   membershipStatus?: string
   avatarContent?: string
   isOnline?: boolean
-
 }
 
 const SidebarContainer = styled.div`
   width: 319px;
-  height: 100vh;
+  height: full;
   background-color: ${colors.primary};
   color: ${colors.brightWhite};
   display: flex;
@@ -39,52 +36,12 @@ const LogoContainer = styled.div`
   margin-bottom: 30px;
 `
 
-const LogoText = styled.div`
-  font-size: 20px;
-  font-weight: ${fonts.poppins.weights.bold};
-  color: ${colors.tertiary}; // Green color for logo
-  display: flex;
-  align-items: center;
-  gap: 4px;
-`
-
-const LeafIcon = styled.div`
-  position: relative;
-  width: 20px;
-  height: 20px;
-  
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: ${colors.tertiary};
-    border-radius: 50% 0 50% 50%;
-    transform: rotate(45deg);
-  }
-  
-  &:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 6px;
-    height: 6px;
-    background-color: ${colors.brightWhite};
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-  }
-`
-
 const ProfileSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 24px;
 `
-
 
 const AvatarContainer = styled.div`
   position: relative;
@@ -94,8 +51,8 @@ const AvatarContainer = styled.div`
 const AvatarBackground = styled.div`
   width: 90px;
   height: 90px;
-  border-radius: 50%;
-  background-color: #e9d8fd; // Light purple background
+  border-radius: 20%;
+  background-color: #e9d8fd;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,11 +64,10 @@ const OnlineIndicator = styled.div`
   right: 0;
   width: 16px;
   height: 16px;
-  background-color: ${colors.tertiary}; // Green for online status
+  background-color: ${colors.tertiary};
   border: 2px solid ${colors.primary};
   border-radius: 50%;
 `
-
 
 const UserName = styled.div`
   font-size: 18px;
@@ -122,7 +78,7 @@ const UserName = styled.div`
 const MembershipStatus = styled.div`
   font-size: 14px;
   font-weight: ${fonts.poppins.weights.regular};
-  color: #a0aec0; // Light gray for membership status
+  color: #a0aec0;
   margin-bottom: 16px;
 `
 
@@ -147,11 +103,6 @@ const Dot = styled.span<{ color: string }>`
   background-color: ${({ color }) => color};
 `
 
-const TaskCardContainer = styled.div`
-  margin-bottom: 24px;
-  transform: scale(0.9);
-  transform-origin: top center;
-`
 
 const NavSection = styled.div`
   display: flex;
@@ -161,9 +112,7 @@ const NavSection = styled.div`
 `
 
 const NavButton = styled(Button)`
-
   width: 100%;
-
   height: 48px;
   justify-content: flex-start;
   padding-left: 20px;
@@ -171,18 +120,16 @@ const NavButton = styled(Button)`
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: ${colors.brightWhite};
-  
+
   &:hover {
     background-color: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.2);
   }
 `
 
-
 const LogOutButton = styled(NavButton)`
   margin-top: 24px;
 `
-
 
 const Sidebar: React.FC<SidebarProps> = ({
   height = "178cm",
@@ -198,14 +145,14 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <SidebarContainer>
-
-      {/* Logo */}
+      {/* Logo Image */}
       <LogoContainer>
-        <LogoText>
-          FOOD
-          <LeafIcon />
-          LENS
-        </LogoText>
+        <Image
+          src="/images/logo2.jpg"
+          alt="FoodLens Logo"
+          width={40}
+          height={40}
+        />
       </LogoContainer>
 
       {/* Profile Section */}
@@ -227,14 +174,10 @@ const Sidebar: React.FC<SidebarProps> = ({
         </Stats>
       </ProfileSection>
 
-
       {/* Task Progress Card */}
-      <TaskCardContainer>
-        <TaskCard progress={85} taskText="Your today's task almost done!" buttonText="View Task" showLabel={false} />
-      </TaskCardContainer>
+      
 
       {/* Navigation Buttons */}
-
       <NavSection>
         <NavButton variant="secondary" size="medium" onClick={() => handleNavClick("Dashboard")}>
           <span style={{ color: "#06B6D4" }}>⚡</span> Dashboard
@@ -258,16 +201,13 @@ const Sidebar: React.FC<SidebarProps> = ({
           <span style={{ color: "#06B6D4" }}>📅</span> Plan Your Diet
         </NavButton>
 
-
         {/* Log Out Button */}
         <LogOutButton variant="secondary" size="medium" onClick={() => handleNavClick("Log Out")}>
           <span style={{ color: "#06B6D4" }}>←</span> Log Out
         </LogOutButton>
       </NavSection>
-
     </SidebarContainer>
   )
 }
 
 export default Sidebar
-
