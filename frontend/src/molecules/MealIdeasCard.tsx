@@ -1,12 +1,12 @@
 // components/MealIdeasCard.tsx
 "use client";
 
-import React from 'react';
-import styled from 'styled-components';
-import { colors } from '../styles/colors';
-import { fonts } from '../styles/fonts';
-import Button from '../atoms/Button';
-import { FaCarrot, FaDrumstickBite, FaTint, FaHeart } from 'react-icons/fa';
+import React from "react";
+import styled from "styled-components";
+import { colors } from "../styles/colors";
+import { fonts } from "../styles/fonts";
+import Button from "../atoms/Button";
+import { FaCarrot, FaDrumstickBite, FaTint, FaHeart } from "react-icons/fa";
 
 interface MealIdeasCardProps {
   image: string;
@@ -91,11 +91,11 @@ const NutritionBadge = styled.div<{ type: string }>`
 
   ${({ type }) => {
     switch (type) {
-      case 'carbs':
+      case "carbs":
         return `background-color: #E7FBBE;`; // Light green
-      case 'protein':
+      case "protein":
         return `background-color: #FFDAB9;`; // Light peach
-      case 'fat':
+      case "fat":
         return `background-color: #FFCCCB;`; // Light pink
       default:
         return `background-color: #E7FBBE;`;
@@ -132,7 +132,7 @@ const FooterSection = styled.div`
 `;
 
 const HeartIcon = styled(FaHeart)`
-  color: #EF4444;
+  color: #ef4444;
   font-size: 20px;
   cursor: pointer;
 `;

@@ -35,6 +35,13 @@ const BlogGrid = styled.div`
   grid-template-columns: repeat(3, 1fr); // 3 columns
   gap: 30px; // Space between cards
   justify-items: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr); // 2 columns on tablets
+  }
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr; // 1 column on mobile
+  }
 `;
 
 const ErrorMessage = styled.p`
