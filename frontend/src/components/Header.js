@@ -78,6 +78,12 @@ export default function Header() {
           Meal Blogs
         </Link>
         <Link
+          href="/play-eatsmart"
+          style={{ color: "#fff", textDecoration: "none", marginRight: "20px" }}
+        >
+          Play EatSmart
+        </Link>
+        <Link
           href="/profile"
           style={{ color: "#fff", margin: "0 15px", textDecoration: "none" }}
         >

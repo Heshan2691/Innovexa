@@ -60,6 +60,12 @@ export default function Navbar() {
         >
           View Insights
         </Link>
+        <Link
+          href="/play-eatsmart"
+          style={{ color: "#fff", textDecoration: "none", marginRight: "20px" }}
+        >
+          Play EatSmart
+        </Link>
       </div>
       <button
         onClick={handleLogout}
