@@ -72,6 +72,12 @@ export default function Header() {
           View Insights
         </Link>
         <Link
+          href="/meal-ai"
+          style={{ color: "#fff", textDecoration: "none", marginRight: "20px" }}
+        >
+          Food Log
+        </Link>
+        <Link
           href="/meal-blogs"
           style={{ color: "#fff", textDecoration: "none", marginRight: "20px" }}
         >
