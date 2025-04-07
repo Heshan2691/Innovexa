@@ -49,13 +49,14 @@ const AvatarContainer = styled.div`
 `
 
 const AvatarBackground = styled.div`
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   border-radius: 20%;
   background-color: #e9d8fd;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 48px;
 `
 
 const OnlineIndicator = styled.div`
@@ -109,6 +110,7 @@ const NavSection = styled.div`
   flex-direction: column;
   gap: 12px;
   flex: 1;
+  align-items: center;
 `
 
 const NavButton = styled(Button)`
