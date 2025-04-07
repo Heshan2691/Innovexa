@@ -11,6 +11,7 @@ import healthDataRoutes from "./routes/healthDataRoutes.js";
 import mealLogRoutes from "./routes/mealLogRoutes.js";
 import mealBlogRoutes from "./routes/mealBlogRoutes.js";
 import externalMealBlogRoutes from "./routes/externalMealBlogRoutes.js";
+import foodAiRoutes from "./routes/foodAiRoutes.js";
 
 // Load environment variables
 dotenv.config();
@@ -19,7 +20,10 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: '*', // Allow all origins for now (for testing purposes)
+}));
+
 app.use(express.json());
 
 // Routes
@@ -36,6 +40,7 @@ app.use("/api/health-data", healthDataRoutes); // Mount health data routes
 app.use("/api/meal-logs", mealLogRoutes); // Mount meal log routes
 app.use("/api/meal-blogs", mealBlogRoutes); // Mount meal blog routes
 app.use("/api/external-meal-blogs", externalMealBlogRoutes); // Mount external meal blog routes
+app.use("/api/food-ai", foodAiRoutes); // Mount food AI routes
 
 // Connect to MongoDB and start the server
 const PORT = process.env.PORT || 5000;
