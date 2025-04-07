@@ -9,6 +9,8 @@ import connectDB from "./config/db.js";
 import recipeRoutes from "./routes/recipeRoutes.js";
 import healthDataRoutes from "./routes/healthDataRoutes.js";
 import mealLogRoutes from "./routes/mealLogRoutes.js";
+import mealBlogRoutes from "./routes/mealBlogRoutes.js";
+import externalMealBlogRoutes from "./routes/externalMealBlogRoutes.js";
 
 // Load environment variables
 dotenv.config();
@@ -32,6 +34,8 @@ app.use("/api/diet-plans", dietPlanRouter); // Mount diet plan routes
 app.use("/api/recipes", recipeRoutes); // Mount recipe routes
 app.use("/api/health-data", healthDataRoutes); // Mount health data routes
 app.use("/api/meal-logs", mealLogRoutes); // Mount meal log routes
+app.use("/api/meal-blogs", mealBlogRoutes); // Mount meal blog routes
+app.use("/api/external-meal-blogs", externalMealBlogRoutes); // Mount external meal blog routes
 
 // Connect to MongoDB and start the server
 const PORT = process.env.PORT || 5000;
