@@ -113,6 +113,7 @@ export default function Register() {
             name="age"
             value={formData.age}
             onChange={handleChange}
+            required
             disabled={loading}
             style={{
               width: "100%",
@@ -132,6 +133,7 @@ export default function Register() {
             name="weight"
             value={formData.weight}
             onChange={handleChange}
+            required
             disabled={loading}
             style={{
               width: "100%",
@@ -151,6 +153,7 @@ export default function Register() {
             name="height"
             value={formData.height}
             onChange={handleChange}
+            required
             disabled={loading}
             style={{
               width: "100%",

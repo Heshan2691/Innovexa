@@ -2,12 +2,17 @@ import { Router } from "express";
 import DietPlan from "../models/DietPlan.js";
 import Meal from "../models/Meal.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
-import { generateDietPlan } from "../controllers/dietPlanController.js";
+import express from "express";
+import {
+  generateDietPlan,
+  regenerateDayPlan,
+} from "../controllers/dietPlanController.js";
 
-const router = Router();
+const router = express.Router();
 
 // Generate a new diet plan (POST /api/diet-plans/generate) - Protected
 router.post("/generate", authMiddleware, generateDietPlan);
+router.put("/regenerate/:planId/:dayNumber", authMiddleware, regenerateDayPlan);
 
 // Get all diet plans for the logged-in user (GET /api/diet-plans) - Protected
 router.get("/", authMiddleware, async (req, res) => {
