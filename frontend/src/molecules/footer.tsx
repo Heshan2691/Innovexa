@@ -12,7 +12,7 @@ import { FaTwitter, FaFacebookF, FaInstagram, FaGithub } from 'react-icons/fa';
 
 // Styled components for the Footer
 const FooterContainer = styled.footer`
-  width: 1440px; // Specified width
+  width: full; // Specified width
   height: 533px; // Specified height
   background-color: ${colors.primary}; // Midnight Blue (#2A3E72)
   color: ${colors.brightWhite};
@@ -179,19 +179,19 @@ const Footer: React.FC = () => {
             <InstagramTitle>Follow Us On Instagram</InstagramTitle>
             <InstagramGrid>
               <InstagramImage
-                src="https://via.placeholder.com/150?text=Fries"
+                src="/images/image4.jpeg"
                 alt="Fries"
               />
               <InstagramImage
-                src="https://via.placeholder.com/150?text=Eggs"
+                src="/images/image3.jpeg"
                 alt="Eggs"
               />
               <InstagramImage
-                src="https://via.placeholder.com/150?text=Salad"
+                src="/images/image1.jpeg"
                 alt="Salad"
               />
               <InstagramImage
-                src="https://via.placeholder.com/150?text=Pancakes"
+                src="/images/image2.jpeg"
                 alt="Pancakes"
               />
             </InstagramGrid>
