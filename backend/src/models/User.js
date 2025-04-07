@@ -12,6 +12,9 @@ const userSchema = new mongoose.Schema({
     enum: ["weight-loss", "muscle-gain", "maintenance"],
     default: "maintenance",
   },
+  refreshToken: {
+    type: String,
+  },
   createdAt: { type: Date, default: Date.now },
 });
 
