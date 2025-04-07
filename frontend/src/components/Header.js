@@ -72,6 +72,12 @@ export default function Header() {
           View Insights
         </Link>
         <Link
+          href="/meal-blogs"
+          style={{ color: "#fff", textDecoration: "none", marginRight: "20px" }}
+        >
+          Meal Blogs
+        </Link>
+        <Link
           href="/profile"
           style={{ color: "#fff", margin: "0 15px", textDecoration: "none" }}
         >

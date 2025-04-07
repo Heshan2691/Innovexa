@@ -49,7 +49,6 @@ const generateSingleDayPlan = async (
       }
     );
 
-
     console.log(
       "Spoonacular API Response:",
       JSON.stringify(spoonacularResponse.data, null, 2)
@@ -90,14 +89,11 @@ const generateSingleDayPlan = async (
       idealMacros = { protein: 30, carbs: 40, fats: 30 };
     }
 
-
     const scoredMeals = meals.map((meal) => {
-
       const proteinCalories = (meal.protein || 0) * 4;
       const carbsCalories = (meal.carbs || 0) * 4;
       const fatsCalories = (meal.fats || 0) * 9;
       const totalMacroCalories = proteinCalories + carbsCalories + fatsCalories;
-
 
       const proteinPercent =
         totalMacroCalories > 0
@@ -108,15 +104,12 @@ const generateSingleDayPlan = async (
       const fatsPercent =
         totalMacroCalories > 0 ? (fatsCalories / totalMacroCalories) * 100 : 0;
 
-
-
       const proteinDiff = Math.abs(proteinPercent - idealMacros.protein);
       const carbsDiff = Math.abs(carbsPercent - idealMacros.carbs);
       const fatsDiff = Math.abs(fatsPercent - idealMacros.fats);
       const totalDiff = proteinDiff + carbsDiff + fatsDiff;
 
       const score = Math.max(0, 100 - totalDiff);
-
 
       return { meal, score };
     });
@@ -135,9 +128,7 @@ const generateSingleDayPlan = async (
     }
 
     if (selectedMeals.length === 0) {
-
       throw new Error("No suitable meals found within calorie target");
-
     }
 
     return {
@@ -198,11 +189,9 @@ export const generateDietPlan = async (req, res) => {
 
     const { age, weight, height, healthGoals } = user;
     if (!age || !weight || !height) {
-      return res
-        .status(400)
-        .json({
-          message: "Please complete your profile (age, weight, height)",
-        });
+      return res.status(400).json({
+        message: "Please complete your profile (age, weight, height)",
+      });
     }
     const bmr = 10 * weight + 6.25 * height - 5 * age + 5;
     const activityMultiplier = 1.55;
@@ -275,11 +264,9 @@ export const regenerateDayPlan = async (req, res) => {
 
     const { age, weight, height, healthGoals } = user;
     if (!age || !weight || !height) {
-      return res
-        .status(400)
-        .json({
-          message: "Please complete your profile (age, weight, height)",
-        });
+      return res.status(400).json({
+        message: "Please complete your profile (age, weight, height)",
+      });
     }
     const bmr = 10 * weight + 6.25 * height - 5 * age + 5;
     const activityMultiplier = 1.55;
