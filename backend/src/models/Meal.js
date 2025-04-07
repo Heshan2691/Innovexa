@@ -10,6 +10,11 @@ const mealSchema = new mongoose.Schema({
   source: { type: String, default: "User" },
   sourceUrl: { type: String },
   imageUrl: { type: String }, // New field to store the image URL
+  date: {
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
 });
 
 export default mongoose.model("Meal", mealSchema);
