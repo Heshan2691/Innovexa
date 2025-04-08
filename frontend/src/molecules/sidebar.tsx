@@ -421,7 +421,13 @@ const Sidebar: React.FC<SidebarProps> = ({
     <SidebarContainer>
       {/* Logo Image */}
       <LogoContainer>
-        <Image src="/logo1.png" alt="FoodLens Logo" width={150} height={150} />
+        <Image
+          src="/logo1.png"
+          alt="FoodLens Logo"
+          width={150}
+          height={150}
+          priority
+        />
       </LogoContainer>
 
       {/* Profile Section */}
