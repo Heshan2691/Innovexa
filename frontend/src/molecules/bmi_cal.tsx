@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useEffect } from "react"
-import Button from "../atoms/Button"
-import styled from "styled-components"
-import { colors } from "../styles/colors"
-import { fonts } from "../styles/fonts"
+import type React from "react";
+import { useState, useEffect } from "react";
+import Button from "../atoms/Button";
+import styled from "styled-components";
+import { colors } from "../styles/colors";
+import { fonts } from "../styles/fonts";
 
 // Styled components for the BMI calculator
 const CalculatorContainer = styled.div`
@@ -17,21 +17,21 @@ const CalculatorContainer = styled.div`
   padding: 24px;
   width: 100%;
   max-width: 360px;
-`
+`;
 
 const InputSection = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-bottom: 24px;
-`
+`;
 
 const InputCard = styled.div`
   background-color: ${colors.brightWhite};
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
-`
+`;
 
 const InputLabel = styled.div`
   font-family: ${fonts.poppins.family};
@@ -39,7 +39,7 @@ const InputLabel = styled.div`
   font-size: 14px;
   color: ${colors.steelGray};
   margin-bottom: 8px;
-`
+`;
 
 const InputValue = styled.div`
   font-family: ${fonts.poppins.family};
@@ -48,18 +48,18 @@ const InputValue = styled.div`
   color: ${colors.secondary};
   text-align: center;
   margin-bottom: 12px;
-`
+`;
 
 const InputControls = styled.div`
   display: flex;
   justify-content: space-between;
-`
+`;
 
 const ControlButton = styled.button`
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background-color: #F2F4F7;
+  background-color: #f2f4f7;
   border: none;
   display: flex;
   align-items: center;
@@ -67,11 +67,11 @@ const ControlButton = styled.button`
   font-size: 18px;
   color: ${colors.steelGray};
   cursor: pointer;
-  
+
   &:hover {
-    background-color: #E4E7EC;
+    background-color: #e4e7ec;
   }
-`
+`;
 
 const HeightSection = styled.div`
   background-color: ${colors.brightWhite};
@@ -79,12 +79,12 @@ const HeightSection = styled.div`
   padding: 16px;
   margin-bottom: 24px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
-`
+`;
 
 const SliderContainer = styled.div`
   margin-top: 16px;
   position: relative;
-`
+`;
 
 const SliderPointer = styled.div<{ position: number }>`
   position: absolute;
@@ -96,17 +96,17 @@ const SliderPointer = styled.div<{ position: number }>`
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-top: 8px solid ${colors.secondary};
-`
+`;
 
 const ResultSection = styled.div`
   margin-top: 24px;
-`
+`;
 
 const ResultHeader = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 16px;
-`
+`;
 
 const BackButton = styled.button`
   background: none;
@@ -114,7 +114,7 @@ const BackButton = styled.button`
   cursor: pointer;
   color: ${colors.steelGray};
   font-size: 20px;
-`
+`;
 
 const ResultTitle = styled.div`
   font-family: ${fonts.poppins.family};
@@ -123,7 +123,7 @@ const ResultTitle = styled.div`
   color: ${colors.deepSlate};
   flex-grow: 1;
   text-align: center;
-`
+`;
 
 const BMIValue = styled.div`
   font-family: ${fonts.poppins.family};
@@ -132,15 +132,23 @@ const BMIValue = styled.div`
   color: ${colors.tertiary};
   text-align: center;
   margin-bottom: 16px;
-`
+`;
 
 const BMIScale = styled.div`
   height: 8px;
-  background: linear-gradient(90deg, ${colors.tertiary} 0%, ${colors.tertiary} 33%, #FACC15 33%, #FACC15 66%, #EF4444 66%, #EF4444 100%);
+  background: linear-gradient(
+    90deg,
+    ${colors.tertiary} 0%,
+    ${colors.tertiary} 33%,
+    #facc15 33%,
+    #facc15 66%,
+    #ef4444 66%,
+    #ef4444 100%
+  );
   border-radius: 4px;
   margin-bottom: 24px;
   position: relative;
-`
+`;
 
 const BMIIndicator = styled.div<{ position: number }>`
   position: absolute;
@@ -151,34 +159,34 @@ const BMIIndicator = styled.div<{ position: number }>`
   background-color: ${colors.tertiary};
   border-radius: 50%;
   transform: translateX(-50%);
-`
+`;
 
 const BMISummary = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   margin-bottom: 24px;
-`
+`;
 
 const SummaryItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 const SummaryValue = styled.div`
   font-family: ${fonts.poppins.family};
   font-weight: ${fonts.poppins.weights.semiBold};
   font-size: 16px;
   color: ${colors.deepSlate};
-`
+`;
 
 const SummaryLabel = styled.div`
   font-family: ${fonts.poppins.family};
   font-weight: ${fonts.poppins.weights.regular};
   font-size: 12px;
   color: ${colors.steelGray};
-`
+`;
 
 const HealthyWeightText = styled.div`
   font-family: ${fonts.poppins.family};
@@ -186,12 +194,12 @@ const HealthyWeightText = styled.div`
   font-size: 14px;
   color: ${colors.deepSlate};
   margin-bottom: 8px;
-`
+`;
 
 const HealthyWeightRange = styled.span`
   font-weight: ${fonts.poppins.weights.semiBold};
   color: ${colors.tertiary};
-`
+`;
 
 const BMIExplanation = styled.div`
   font-family: ${fonts.poppins.family};
@@ -199,7 +207,7 @@ const BMIExplanation = styled.div`
   font-size: 12px;
   color: ${colors.steelGray};
   line-height: 1.5;
-`
+`;
 
 const BMICategory = styled.div`
   display: inline-block;
@@ -211,7 +219,7 @@ const BMICategory = styled.div`
   padding: 2px 8px;
   border-radius: 4px;
   margin-bottom: 16px;
-`
+`;
 
 // Styled Button for custom styles
 const StyledButton = styled(Button)`
@@ -219,83 +227,89 @@ const StyledButton = styled(Button)`
   width: 100%;
   background: ${colors.secondary};
   border-color: ${colors.secondary};
-`
+`;
+
+// Define the props interface for BMICalculator
+interface BMICalculatorProps {
+  onBmiCalculated?: (bmi: number) => void; // Optional callback to send BMI to parent
+}
 
 // BMI Calculator Component
 const BMICalculator: React.FC = () => {
-  const [weight, setWeight] = useState(65)
-  const [age, setAge] = useState(26)
-  const [height, setHeight] = useState(170)
-  const [gender] = useState<"male" | "female">("male")
-  const [showResult, setShowResult] = useState(false)
-  const [bmi, setBmi] = useState(0)
+  const [weight, setWeight] = useState(65);
+  const [age, setAge] = useState(26);
+  const [height, setHeight] = useState(170);
+  const [gender] = useState<"male" | "female">("male");
+  const [showResult, setShowResult] = useState(false);
+  const [bmi, setBmi] = useState(0);
 
   // Calculate BMI when inputs change
   useEffect(() => {
     // BMI formula: weight (kg) / (height (m))^2
-    const heightInMeters = height / 100
-    const calculatedBmi = weight / (heightInMeters * heightInMeters)
-    setBmi(Number.parseFloat(calculatedBmi.toFixed(1)))
-  }, [weight, height])
+    const heightInMeters = height / 100;
+    const calculatedBmi = weight / (heightInMeters * heightInMeters);
+    setBmi(Number.parseFloat(calculatedBmi.toFixed(1)));
+  }, [weight, height]);
 
   // Calculate healthy weight range
   const calculateHealthyWeightRange = () => {
     // BMI range for normal weight is 18.5-24.9
-    const minWeight = (18.5 * (height / 100) * (height / 100)).toFixed(1)
-    const maxWeight = (24.9 * (height / 100) * (height / 100)).toFixed(1)
-    return `${minWeight} - ${maxWeight} kg`
-  }
+    const minWeight = (18.5 * (height / 100) * (height / 100)).toFixed(1);
+    const maxWeight = (24.9 * (height / 100) * (height / 100)).toFixed(1);
+    return `${minWeight} - ${maxWeight} kg`;
+  };
 
   // Get BMI category
   const getBmiCategory = () => {
-    if (bmi < 18.5) return "Underweight"
-    if (bmi < 25) return "Normal"
-    if (bmi < 30) return "Overweight"
-    return "Obese"
-  }
+    if (bmi < 18.5) return "Underweight";
+    if (bmi < 25) return "Normal";
+    if (bmi < 30) return "Overweight";
+    return "Obese";
+  };
 
   // Get BMI category color
   const getBmiColor = () => {
-    if (bmi < 18.5) return "#FACC15" // Yellow for underweight
-    if (bmi < 25) return colors.tertiary // Green for normal
-    if (bmi < 30) return "#FACC15" // Yellow for overweight
-    return "#EF4444" // Red for obese
-  }
+    if (bmi < 18.5) return "#FACC15"; // Yellow for underweight
+    if (bmi < 25) return colors.tertiary; // Green for normal
+    if (bmi < 30) return "#FACC15"; // Yellow for overweight
+    return "#EF4444"; // Red for obese
+  };
 
   // Calculate BMI scale position (0-100%)
   const getBmiPosition = () => {
-    if (bmi < 15) return 0
-    if (bmi > 35) return 100
+    if (bmi < 15) return 0;
+    if (bmi > 35) return 100;
     // Map BMI 15-35 to 0-100%
-    return ((bmi - 15) / 20) * 100
-  }
+    return ((bmi - 15) / 20) * 100;
+  };
 
   // Handle increment/decrement
-  const incrementWeight = () => setWeight((prev) => prev + 1)
-  const decrementWeight = () => setWeight((prev) => (prev > 1 ? prev - 1 : 1))
-  const incrementAge = () => setAge((prev) => prev + 1)
-  const decrementAge = () => setAge((prev) => (prev > 1 ? prev - 1 : 1))
+  const incrementWeight = () => setWeight((prev) => prev + 1);
+  const decrementWeight = () => setWeight((prev) => (prev > 1 ? prev - 1 : 1));
+  const incrementAge = () => setAge((prev) => prev + 1);
+  const decrementAge = () => setAge((prev) => (prev > 1 ? prev - 1 : 1));
 
   // Handle height slider change
   const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setHeight(Number.parseInt(e.target.value))
-  }
+    setHeight(Number.parseInt(e.target.value));
+  };
 
   // Calculate slider pointer position
   const getSliderPosition = () => {
     // Map height 100-220 to 0-100%
-    return ((height - 100) / 120) * 100
-  }
+    return ((height - 100) / 120) * 100;
+  };
 
   // Handle Find My BMI button click
   const handleCalculate = () => {
-    setShowResult(true)
-  }
+    setShowResult(true);
+    if (onBmiCalculated) onBmiCalculated(bmi);
+  };
 
   // Handle back button click
   const handleBack = () => {
-    setShowResult(false)
-  }
+    setShowResult(false);
+  };
 
   return (
     <CalculatorContainer>
@@ -343,7 +357,11 @@ const BMICalculator: React.FC = () => {
           </HeightSection>
 
           {/* Removed the duplicate button, keeping only one */}
-          <StyledButton variant="primary" size="medium" onClick={handleCalculate}>
+          <StyledButton
+            variant="primary"
+            size="medium"
+            onClick={handleCalculate}
+          >
             Find My BMI
           </StyledButton>
         </>
@@ -358,7 +376,10 @@ const BMICalculator: React.FC = () => {
           <BMICategory>{getBmiCategory()}</BMICategory>
 
           <BMIScale>
-            <BMIIndicator position={getBmiPosition()} style={{ backgroundColor: getBmiColor() }} />
+            <BMIIndicator
+              position={getBmiPosition()}
+              style={{ backgroundColor: getBmiColor() }}
+            />
           </BMIScale>
 
           <BMISummary>
@@ -381,24 +402,28 @@ const BMICalculator: React.FC = () => {
           </BMISummary>
 
           <HealthyWeightText>
-            Healthy weight for the height: <HealthyWeightRange>{calculateHealthyWeightRange()}</HealthyWeightRange>
+            Healthy weight for the height:{" "}
+            <HealthyWeightRange>
+              {calculateHealthyWeightRange()}
+            </HealthyWeightRange>
           </HealthyWeightText>
 
           <BMIExplanation>
-            Your BMI is {bmi}, indicating your weight is in the {getBmiCategory().toLowerCase()} category for adults of
-            your height.
+            Your BMI is {bmi}, indicating your weight is in the{" "}
+            {getBmiCategory().toLowerCase()} category for adults of your height.
             <br />
             <br />
-            For your height, a normal weight range would be {calculateHealthyWeightRange()}.
+            For your height, a normal weight range would be{" "}
+            {calculateHealthyWeightRange()}.
             <br />
             <br />
-            Maintaining a healthy weight may reduce the risk of chronic diseases associated with overweight and obesity.
+            Maintaining a healthy weight may reduce the risk of chronic diseases
+            associated with overweight and obesity.
           </BMIExplanation>
         </ResultSection>
       )}
     </CalculatorContainer>
-  )
-}
+  );
+};
 
-export default BMICalculator
-
+export default BMICalculator;
