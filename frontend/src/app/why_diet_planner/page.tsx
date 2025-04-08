@@ -1,7 +1,6 @@
 "use client"
 import styled from "styled-components"
 import Sidebar from "@/molecules/sidebar"
-import Footer from "@/molecules/footer"
 import Button from "@/atoms/Button"
 import { colors } from "@/styles/colors"
 import { fonts } from "@/styles/fonts"
@@ -313,7 +312,6 @@ export default function Home() {
             </GoalsContainer>
           </GoalsSection>
         </ContentSection>
-        <Footer />
       </MainContent>
     </PageContainer>
   )

@@ -1,7 +1,6 @@
 "use client"
 import styled from "styled-components"
 import Sidebar from "@/molecules/sidebar"
-import Footer from "@/molecules/footer"
 import { colors } from "@/styles/colors"
 import { fonts } from "@/styles/fonts"
 import Image from "next/image"
@@ -310,7 +309,6 @@ export default function MuscleGainDietPlan() {
             </List>
           </DietPlanContent>
         </ContentSection>
-        <Footer />
       </MainContent>
     </PageWrapper>
   )

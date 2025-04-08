@@ -6,7 +6,6 @@ import { useState, useEffect } from "react"
 import styled from "styled-components"
 import { colors } from "../styles/colors"
 import { fonts } from "../styles/fonts"
-import Footer from "../molecules/footer"
 import Image from "next/image"
 import { ArrowLeft, Star } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -693,7 +692,7 @@ const EatSmartGame: React.FC = () => {
           </MealsPanel>
         </GameContainer>
 
-        <Footer />
+        
       </MainContent>
 
       {/* Success Result Modal */}

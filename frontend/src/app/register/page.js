@@ -321,7 +321,7 @@ const RegisterContainer = styled.div`
 
 const Sidebar = styled.div`
   width: 30%;
-  background-color: #1a3c5e; /* Dark blue from the image */
+  background-color: ${colors.primary}; /* Dark blue from the image */
   display: flex;
   flex-direction: column;
   justify-content: center;
