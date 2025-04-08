@@ -1,7 +1,6 @@
 "use client"
 import styled from "styled-components"
 import Sidebar from "@/molecules/sidebar"
-import Footer from "@/molecules/footer"
 import { fonts } from "@/styles/fonts"
 import Image from "next/image"
 
@@ -181,7 +180,6 @@ export default function VeganDietPlan() {
             </Paragraph>
           </DietPlanContent>
         </ContentSection>
-        <Footer />
       </MainContent>
     </PageWrapper>
   )
