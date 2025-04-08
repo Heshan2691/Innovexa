@@ -193,11 +193,10 @@ export default function Login() {
     <LoginContainer>
       <Sidebar>
         <Logo>
-          <LogoText>
-            FOOD <span>LENS</span>
-          </LogoText>
+          <svg width="500" height="240" xmlns="http://www.w3.org/2000/svg">
+            <image href="/logo1.png" width="500" height="240" />
+          </svg>
         </Logo>
-        <Tagline>Healthy Life</Tagline>
       </Sidebar>
       <FormContainer>
         <FormWrapper>
