@@ -2,10 +2,6 @@
 node_modules/
 .env
 
-# Next.js
-frontend/.next/
-frontend/out/
-
 # Build artifacts
 dist/
 build/
