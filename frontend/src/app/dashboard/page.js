@@ -24,7 +24,7 @@ export default function Dashboard() {
         // Fetch user profile
         const decodedToken = JSON.parse(atob(token.split(".")[1]));
         const userId = decodedToken.id;
-        const userResponse = await api.get(`/users/${userId}`)
+        const userResponse = await api.get(`/users/${userId}`);
         setUser(userResponse.data);
 
         // Fetch meals
