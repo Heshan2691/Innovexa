@@ -1,6 +1,14 @@
 import { Router } from "express";
 import User from "../models/User.js";
-import { registerUser, loginUser } from "../controllers/authController.js";
+import {
+  registerUser,
+  loginUser,
+  getUserProfile,
+  getSavedMeals,
+  getHealthData,
+  getMoodData,
+  getUserGoal,
+} from "../controllers/authController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 
 const router = Router();
@@ -10,6 +18,13 @@ router.post("/register", registerUser);
 
 // Login a user (POST /api/users/login)
 router.post("/login", loginUser);
+
+router.get("/profile", authMiddleware, getUserProfile);
+
+router.get("/saved", authMiddleware, getSavedMeals);
+router.get("/health-data", authMiddleware, getHealthData);
+router.get("/mood-data", authMiddleware, getMoodData);
+router.get("/goal", authMiddleware, getUserGoal);
 
 // Get all users (GET /api/users) - Protected
 router.get("/", authMiddleware, async (req, res) => {
