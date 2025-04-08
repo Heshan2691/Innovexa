@@ -1,13 +1,32 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
+  "description": "Backend",
   "license": "ISC",
-  "type": "commonjs"
+  "author": "Heshan",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "axios": "^1.8.4",
+    "bcryptjs": "^3.0.2",
+    "clarifai-nodejs-grpc": "^11.2.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "formidable": "^3.5.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.1",
+    "multer": "^1.4.5-lts.2",
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.11.96"
+  }
 }
