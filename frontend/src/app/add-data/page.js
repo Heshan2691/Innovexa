@@ -695,6 +695,7 @@ export default function AddData() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [userName, setUserName] = useState("John");
 
   // Fetch saved meals on component mount
   useEffect(() => {
@@ -912,7 +913,7 @@ export default function AddData() {
 
         <div style={{ padding: "32px", flex: "1" }}>
           {/* Header Section */}
-          <div style={{ marginBottom: "36px" }}>
+          <div style={{ marginBottom: "32px" }}>
             <h1
               style={{
                 fontSize: "32px",
@@ -922,7 +923,7 @@ export default function AddData() {
                 letterSpacing: "-0.025em",
               }}
             >
-              Good Morning, John
+              Track Me
             </h1>
             <p style={{ color: "#6b7280", fontSize: "16px" }}>
               {new Date().toLocaleDateString("en-US", {
