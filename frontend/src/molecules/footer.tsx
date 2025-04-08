@@ -1,14 +1,14 @@
 // components/Footer.tsx
 "use client";
 
-import React from 'react';
-import styled from 'styled-components';
-import { colors } from '../styles/colors';
-import { fonts } from '../styles/fonts';
-import SocialMediaIcon from '../atoms/SocialMediaIcon';
-import FooterLink from '../atoms/FooterLink';
-import InstagramImage from '../atoms/InstagramImage';
-import { FaTwitter, FaFacebookF, FaInstagram, FaGithub } from 'react-icons/fa';
+import React from "react";
+import styled from "styled-components";
+import { colors } from "../styles/colors";
+import { fonts } from "../styles/fonts";
+import SocialMediaIcon from "../atoms/SocialMediaIcon";
+import FooterLink from "../atoms/FooterLink";
+import InstagramImage from "../atoms/InstagramImage";
+import { FaTwitter, FaFacebookF, FaInstagram, FaGithub } from "react-icons/fa";
 
 // Styled components for the Footer
 const FooterContainer = styled.footer`
@@ -135,10 +135,7 @@ const Footer: React.FC = () => {
           </Logo>
           <Tagline>Your AI companion for healthier eating.</Tagline>
           <SocialIcons>
-            <SocialMediaIcon
-              icon={<FaTwitter />}
-              href="https://twitter.com"
-            />
+            <SocialMediaIcon icon={<FaTwitter />} href="https://twitter.com" />
             <SocialMediaIcon
               icon={<FaFacebookF />}
               href="https://facebook.com"
@@ -147,10 +144,7 @@ const Footer: React.FC = () => {
               icon={<FaInstagram />}
               href="https://instagram.com"
             />
-            <SocialMediaIcon
-              icon={<FaGithub />}
-              href="https://github.com"
-            />
+            <SocialMediaIcon icon={<FaGithub />} href="https://github.com" />
           </SocialIcons>
         </LeftSection>
 
@@ -158,13 +152,13 @@ const Footer: React.FC = () => {
         <MiddleSection>
           <NavLinks>
             <FooterLink href="/dashboard">Dashboard</FooterLink>
-            <FooterLink href="/log-food">Log Food</FooterLink>
-            <FooterLink href="/track-me">Track Me</FooterLink>
-            <FooterLink href="/insights">Insights</FooterLink>
+            <FooterLink href="/meal-ai">Log Food</FooterLink>
+            <FooterLink href="/add-data">Track Me</FooterLink>
+            <FooterLink href="/view-insights">Insights</FooterLink>
             <FooterLink href="/meal-ideas">Meal Ideas</FooterLink>
-            <FooterLink href="/plan-your-diet">Plan Your Diet</FooterLink>
+            <FooterLink href="/diet-planner">Plan Your Diet</FooterLink>
             <FooterLink href="/play-eatsmart">Play EatSmart</FooterLink>
-            <FooterLink href="/blog">Blog</FooterLink>
+            <FooterLink href="/meal-blogs">Blog</FooterLink>
           </NavLinks>
         </MiddleSection>
 
@@ -178,22 +172,10 @@ const Footer: React.FC = () => {
           <InstagramFeed>
             <InstagramTitle>Follow Us On Instagram</InstagramTitle>
             <InstagramGrid>
-              <InstagramImage
-                src="/images/image4.jpeg"
-                alt="Fries"
-              />
-              <InstagramImage
-                src="/images/image3.jpeg"
-                alt="Eggs"
-              />
-              <InstagramImage
-                src="/images/image1.jpeg"
-                alt="Salad"
-              />
-              <InstagramImage
-                src="/images/image2.jpeg"
-                alt="Pancakes"
-              />
+              <InstagramImage src="/images/image4.jpeg" alt="Fries" />
+              <InstagramImage src="/images/image3.jpeg" alt="Eggs" />
+              <InstagramImage src="/images/image1.jpeg" alt="Salad" />
+              <InstagramImage src="/images/image2.jpeg" alt="Pancakes" />
             </InstagramGrid>
           </InstagramFeed>
         </RightSection>
