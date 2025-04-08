@@ -376,7 +376,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await api.get("/user/profile");
+        const response = await api.get("/users/profile");
         const userData = response.data;
         setUserName(userData.name || initialUserName);
         setHeight(userData.height || initialHeight);
@@ -422,10 +422,11 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Logo Image */}
       <LogoContainer>
         <Image
-          src="/images/logo1.jpg"
+          src="/logo1.png"
           alt="FoodLens Logo"
-          width={100}
-          height={100}
+          width={150}
+          height={150}
+          priority
         />
       </LogoContainer>
 

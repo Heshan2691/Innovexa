@@ -702,7 +702,7 @@ export default function AddData() {
       try {
         setLoading(true);
         setError("");
-        const response = await api.get("/meals/saved");
+        const response = await api.get("/users/saved");
         setSavedMeals(response.data);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to fetch saved meals");

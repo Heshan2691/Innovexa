@@ -74,15 +74,15 @@ export default function Dashboard() {
         setHealthData(healthResponse.data);
 
         // Fetch saved meals
-        const mealsResponse = await api.get("/meals/saved");
+        const mealsResponse = await api.get("/users/saved");
         setMeals(mealsResponse.data);
 
         // Fetch user name
-        const userResponse = await api.get("/user/profile");
+        const userResponse = await api.get("/users/profile");
         setUserName(userResponse.data.name || "John");
 
         // Fetch mood data (assuming an endpoint exists)
-        const moodResponse = await api.get("/mood-data", {
+        const moodResponse = await api.get("/users/mood-data", {
           params: {
             startDate: startDate.toISOString(),
             endDate: endDate.toISOString(),
@@ -91,7 +91,7 @@ export default function Dashboard() {
         setMoodData(moodResponse.data);
 
         // Fetch user goal (assuming an endpoint exists)
-        const goalResponse = await api.get("/user/goal");
+        const goalResponse = await api.get("/users/goal");
         setUserGoal(goalResponse.data);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to fetch data");
