@@ -1,14 +1,14 @@
 // components/Button.tsx
 "use client";
 
-import React from 'react';
-import styled from 'styled-components';
-import { colors } from '../styles/colors';
-import { fonts } from '../styles/fonts';
+import React from "react";
+import styled from "styled-components";
+import { colors } from "../styles/colors";
+import { fonts } from "../styles/fonts";
 
 interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'tertiary';
-  size?: 'small' | 'medium' | 'large';
+  variant?: "primary" | "secondary" | "tertiary";
+  size?: "small" | "medium" | "large";
   children: React.ReactNode;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
@@ -26,19 +26,19 @@ const StyledButton = styled.button<ButtonProps>`
 
   ${({ size }) => {
     switch (size) {
-      case 'small':
+      case "small":
         return `
           width: 120px;
           height: 40px;
           font-size: 14px;
         `;
-      case 'medium':
+      case "medium":
         return `
           width: 151px;
           height: 48px;
           font-size: 16px;
         `;
-      case 'large':
+      case "large":
         return `
           width: 188px;
           height: 56px;
@@ -55,7 +55,7 @@ const StyledButton = styled.button<ButtonProps>`
 
   ${({ variant }) => {
     switch (variant) {
-      case 'primary':
+      case "primary":
         return `
           border: 2px solid ${colors.secondary};
           background: ${colors.secondary};
@@ -73,7 +73,7 @@ const StyledButton = styled.button<ButtonProps>`
             color: ${colors.brightWhite};
           }
         `;
-      case 'secondary':
+      case "secondary":
         return `
           border: 1px solid ${colors.secondary};
           background: transparent;
@@ -91,7 +91,7 @@ const StyledButton = styled.button<ButtonProps>`
             color: ${colors.brightWhite};
           }
         `;
-      case 'tertiary':
+      case "tertiary":
         return `
           border: transparent;
           background: transparent;
@@ -135,8 +135,8 @@ const StyledButton = styled.button<ButtonProps>`
 `;
 
 const Button: React.FC<ButtonProps> = ({
-  variant = 'primary',
-  size = 'medium',
+  variant = "primary",
+  size = "medium",
   children,
   onClick,
   disabled = false,

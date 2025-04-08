@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
 import { useState, useEffect } from "react"
 import styled from "styled-components"
@@ -10,21 +10,22 @@ import Image from "next/image"
 import { ArrowLeft, Star } from "lucide-react"
 import { useRouter } from "next/navigation"
 
+
 // Types for our game
 interface FoodItem {
-  id: string
-  name: string
-  calories: number
-  image: string
-  isHealthy: boolean
-  category: "protein" | "carbs" | "vegetables" | "junk" | "fruit"
+  id: string;
+  name: string;
+  calories: number;
+  image: string;
+  isHealthy: boolean;
+  category: "protein" | "carbs" | "vegetables" | "junk" | "fruit";
 }
 
 interface SelectedFood {
-  id: string
-  name: string
-  calories: number
-  isHealthy: boolean
+  id: string;
+  name: string;
+  calories: number;
+  isHealthy: boolean;
 }
 
 // Styled components
@@ -32,7 +33,7 @@ const PageContainer = styled.div`
   display: flex;
   min-height: 100vh;
   width: 100%;
-`
+`;
 
 const MainContent = styled.main`
   flex: 1;
@@ -41,7 +42,7 @@ const MainContent = styled.main`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-`
+`;
 
 const GameHeader = styled.div`
   display: flex;
@@ -49,7 +50,7 @@ const GameHeader = styled.div`
   padding: 20px 40px;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-`
+`;
 
 const BackButton = styled.button`
   background: none;
@@ -60,27 +61,27 @@ const BackButton = styled.button`
   justify-content: center;
   margin-right: 20px;
   color: ${colors.primary};
-`
+`;
 
 const Logo = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
   margin-right: 20px;
-`
+`;
 
 const LogoImage = styled.div`
   position: relative;
   width: 30px;
   height: 30px;
-`
+`;
 
 const LogoText = styled.span`
   font-family: ${fonts.poppins.family};
   font-weight: ${fonts.poppins.weights.semiBold};
   font-size: 16px;
   color: ${colors.primary};
-`
+`;
 
 const PageTitle = styled.h1`
   font-family: ${fonts.poppins.family};
@@ -89,14 +90,14 @@ const PageTitle = styled.h1`
   color: ${colors.deepSlate};
   flex: 1;
   text-align: center;
-`
+`;
 
 const GameContainer = styled.div`
   display: flex;
   padding: 40px;
   gap: 20px;
   flex: 1;
-`
+`;
 
 const GamePanel = styled.div`
   flex: 3;
@@ -108,7 +109,7 @@ const GamePanel = styled.div`
   flex-direction: column;
   gap: 20px;
   position: relative;
-`
+`;
 
 const InstructionBox = styled.div`
   display: flex;
@@ -118,7 +119,7 @@ const InstructionBox = styled.div`
   padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   gap: 20px;
-`
+`;
 
 const InstructionText = styled.p`
   font-family: ${fonts.poppins.family};
@@ -126,7 +127,7 @@ const InstructionText = styled.p`
   font-size: 16px;
   color: ${colors.deepSlate};
   flex: 1;
-`
+`;
 
 const InstructionImage = styled.div`
   width: 100px;
@@ -134,14 +135,14 @@ const InstructionImage = styled.div`
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-`
+`;
 
 const FoodGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
   margin-top: 20px;
-`
+`;
 
 const FoodCard = styled.div`
   background-color: white;
@@ -152,7 +153,7 @@ const FoodCard = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 16px;
-`
+`;
 
 const FoodImage = styled.div`
   width: 100px;
@@ -161,7 +162,7 @@ const FoodImage = styled.div`
   border-radius: 50%;
   overflow: hidden;
   margin-bottom: 12px;
-`
+`;
 
 const FoodName = styled.div`
   font-family: ${fonts.poppins.family};
@@ -170,7 +171,7 @@ const FoodName = styled.div`
   color: ${colors.deepSlate};
   margin-bottom: 8px;
   text-align: center;
-`
+`;
 
 const SelectButton = styled.button`
   background-color: ${colors.secondary};
@@ -192,7 +193,7 @@ const SelectButton = styled.button`
     background-color: #d1d5db;
     cursor: not-allowed;
   }
-`
+`;
 
 const GameButton = styled.button`
   background-color: ${colors.secondary};
@@ -211,7 +212,7 @@ const GameButton = styled.button`
   &:hover {
     background-color: ${colors.primary};
   }
-`
+`;
 
 const MealsPanel = styled.div`
   flex: 1;
@@ -221,7 +222,7 @@ const MealsPanel = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
-`
+`;
 
 const PanelTitle = styled.h2`
   font-family: ${fonts.poppins.family};
@@ -229,7 +230,7 @@ const PanelTitle = styled.h2`
   font-size: 18px;
   color: ${colors.deepSlate};
   margin-bottom: 20px;
-`
+`;
 
 const EmptyState = styled.div`
   font-family: ${fonts.poppins.family};
@@ -242,7 +243,7 @@ const EmptyState = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const MealsList = styled.div`
   display: flex;
@@ -250,7 +251,7 @@ const MealsList = styled.div`
   gap: 12px;
   margin-bottom: 20px;
   flex: 1;
-`
+`;
 
 const MealItem = styled.div`
   display: flex;
@@ -258,7 +259,7 @@ const MealItem = styled.div`
   gap: 12px;
   padding: 8px 0;
   border-bottom: 1px solid #f3f4f6;
-`
+`;
 
 const MealImage = styled.div`
   width: 40px;
@@ -266,25 +267,25 @@ const MealImage = styled.div`
   position: relative;
   border-radius: 50%;
   overflow: hidden;
-`
+`;
 
 const MealInfo = styled.div`
   flex: 1;
-`
+`;
 
 const MealName = styled.div`
   font-family: ${fonts.poppins.family};
   font-weight: ${fonts.poppins.weights.medium};
   font-size: 14px;
   color: ${colors.deepSlate};
-`
+`;
 
 const CalorieInfo = styled.div`
   font-family: ${fonts.poppins.family};
   font-weight: ${fonts.poppins.weights.regular};
   font-size: 12px;
   color: #6b7280;
-`
+`;
 
 const TotalCalories = styled.div`
   display: flex;
@@ -296,7 +297,7 @@ const TotalCalories = styled.div`
   font-size: 16px;
   color: ${colors.deepSlate};
   margin-top: auto;
-`
+`;
 
 // Result card styles
 const ResultOverlay = styled.div`
@@ -310,7 +311,7 @@ const ResultOverlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 100;
-`
+`;
 
 const ResultCard = styled.div`
   background-color: white;
@@ -322,14 +323,14 @@ const ResultCard = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-`
+`;
 
 const ResultImage = styled.div`
   width: 120px;
   height: 120px;
   position: relative;
   margin-bottom: 20px;
-`
+`;
 
 const ResultTitle = styled.h2`
   font-family: ${fonts.poppins.family};
@@ -337,7 +338,7 @@ const ResultTitle = styled.h2`
   font-size: 24px;
   color: ${colors.primary};
   margin-bottom: 12px;
-`
+`;
 
 const ResultText = styled.p`
   font-family: ${fonts.poppins.family};
@@ -346,13 +347,13 @@ const ResultText = styled.p`
   color: ${colors.deepSlate};
   margin-bottom: 24px;
   line-height: 1.5;
-`
+`;
 
 const StarRating = styled.div`
   display: flex;
   gap: 8px;
   margin-bottom: 24px;
-`
+`;
 
 const ResultButton = styled.button`
   background-color: ${colors.primary};
@@ -370,7 +371,7 @@ const ResultButton = styled.button`
   &:hover {
     background-color: ${colors.tertiary};
   }
-`
+`;
 
 const BackLink = styled.button`
   background: none;
@@ -380,11 +381,11 @@ const BackLink = styled.button`
   font-size: 14px;
   color: #6b7280;
   cursor: pointer;
-  
+
   &:hover {
     text-decoration: underline;
   }
-`
+`;
 
 // All available food items database
 const allFoodItems: FoodItem[] = [
@@ -484,29 +485,31 @@ const allFoodItems: FoodItem[] = [
     isHealthy: false,
     category: "junk",
   },
-]
+];
 
 const EatSmartGame: React.FC = () => {
-  const router = useRouter()
-  const [selectedFoods, setSelectedFoods] = useState<SelectedFood[]>([])
-  const [gameState, setGameState] = useState<"start" | "selecting" | "result" | "success" | "failure">("start")
-  const [foodItems, setFoodItems] = useState<FoodItem[]>([])
-  const [gameScore, setGameScore] = useState(0)
+  const router = useRouter();
+  const [selectedFoods, setSelectedFoods] = useState<SelectedFood[]>([]);
+  const [gameState, setGameState] = useState<
+    "start" | "selecting" | "result" | "success" | "failure"
+  >("start");
+  const [foodItems, setFoodItems] = useState<FoodItem[]>([]);
+  const [gameScore, setGameScore] = useState(0);
 
   // Generate a random set of food items for each game
   useEffect(() => {
     if (gameState === "start" || gameState === "selecting") {
       // Shuffle and pick 4 random food items
-      const shuffled = [...allFoodItems].sort(() => 0.5 - Math.random())
-      setFoodItems(shuffled.slice(0, 4))
+      const shuffled = [...allFoodItems].sort(() => 0.5 - Math.random());
+      setFoodItems(shuffled.slice(0, 4));
     }
-  }, [gameState])
+  }, [gameState]);
 
   const handleSelectFood = (food: FoodItem) => {
     // Check if food is already selected
     if (selectedFoods.some((item) => item.id === food.id)) {
       // Remove it
-      setSelectedFoods(selectedFoods.filter((item) => item.id !== food.id))
+      setSelectedFoods(selectedFoods.filter((item) => item.id !== food.id));
     } else {
       // Add it
       setSelectedFoods([
@@ -517,84 +520,87 @@ const EatSmartGame: React.FC = () => {
           calories: food.calories,
           isHealthy: food.isHealthy,
         },
-      ])
+      ]);
     }
-  }
+  };
 
   const isFoodSelected = (foodId: string) => {
-    return selectedFoods.some((item) => item.id === foodId)
-  }
+    return selectedFoods.some((item) => item.id === foodId);
+  };
 
-  const totalCalories = selectedFoods.reduce((sum, food) => sum + food.calories, 0)
+  const totalCalories = selectedFoods.reduce(
+    (sum, food) => sum + food.calories,
+    0
+  );
 
   const handleStartGame = () => {
-    setGameState("selecting")
-    setSelectedFoods([])
-  }
+    setGameState("selecting");
+    setSelectedFoods([]);
+  };
 
   const handleContinue = () => {
     if (selectedFoods.length > 0) {
       // Evaluate the user's choices
-      evaluateChoices()
+      evaluateChoices();
     }
-  }
+  };
 
   const evaluateChoices = () => {
     // Calculate score based on healthy choices and total calories
-    let healthyCount = 0
-    let unhealthyCount = 0
+    let healthyCount = 0;
+    let unhealthyCount = 0;
 
     selectedFoods.forEach((food) => {
       if (food.isHealthy) {
-        healthyCount++
+        healthyCount++;
       } else {
-        unhealthyCount++
+        unhealthyCount++;
       }
-    })
+    });
 
     // Calculate score (0-5)
-    let score = 0
+    let score = 0;
 
     // More healthy than unhealthy foods
     if (healthyCount > unhealthyCount) {
-      score += 2
+      score += 2;
     }
 
     // All healthy foods
     if (unhealthyCount === 0 && healthyCount > 0) {
-      score += 1
+      score += 1;
     }
 
     // Reasonable calorie count (under 1000)
     if (totalCalories < 1000) {
-      score += 2
+      score += 2;
     } else if (totalCalories < 1500) {
-      score += 1
+      score += 1;
     }
 
-    setGameScore(score)
+    setGameScore(score);
 
     // Determine if the user won or lost
     if (score >= 3) {
-      setGameState("success")
+      setGameState("success");
     } else {
-      setGameState("failure")
+      setGameState("failure");
     }
-  }
+  };
 
   const handleNewGame = () => {
-    setGameState("start")
-    setSelectedFoods([])
-  }
+    setGameState("start");
+    setSelectedFoods([]);
+  };
 
   const handleTryAgain = () => {
-    setGameState("selecting")
-    setSelectedFoods([])
-  }
+    setGameState("selecting");
+    setSelectedFoods([]);
+  };
 
   const handleBack = () => {
-    router.push("/dashboard")
-  }
+    router.push("/dashboard");
+  };
 
   // Render star rating based on score
   const renderStars = (score: number, max = 5) => {
@@ -605,12 +611,11 @@ const EatSmartGame: React.FC = () => {
         fill={index < score ? colors.primary : "none"}
         stroke={index < score ? colors.primary : "#d1d5db"}
       />
-    ))
-  }
+    ));
+  };
 
   return (
     <PageContainer>
-
       <MainContent>
         <GameHeader>
           <BackButton onClick={handleBack}>
@@ -618,7 +623,7 @@ const EatSmartGame: React.FC = () => {
           </BackButton>
           <Logo>
             <LogoImage>
-              <Image src="/images/logo1.svg" alt="Food Lens Logo" fill />
+              <Image src="/logo1.png" alt="Food Lens Logo" fill />
             </LogoImage>
             <LogoText>FOOD LENS</LogoText>
           </Logo>
@@ -629,10 +634,16 @@ const EatSmartGame: React.FC = () => {
           <GamePanel>
             <InstructionBox>
               <InstructionText>
-                Choose the finest and healthiest meals from our vibrant menu to nourish your body!
+                Choose the finest and healthiest meals from our vibrant menu to
+                nourish your body!
               </InstructionText>
               <InstructionImage>
-                <Image src="/images/healthy-plate.jpg" alt="Healthy Food" fill style={{ objectFit: "cover" }} />
+                <Image
+                  src="/images/healthy-plate.jpg"
+                  alt="Healthy Food"
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
               </InstructionImage>
             </InstructionBox>
 
@@ -640,19 +651,31 @@ const EatSmartGame: React.FC = () => {
               {foodItems.map((food) => (
                 <FoodCard key={food.id}>
                   <FoodImage>
-                    <Image src={food.image || "/placeholder.svg"} alt={food.name} fill style={{ objectFit: "cover" }} />
+                    <Image
+                      src={food.image || "/placeholder.svg"}
+                      alt={food.name}
+                      fill
+                      style={{ objectFit: "cover" }}
+                    />
                   </FoodImage>
                   <FoodName>{food.name}</FoodName>
-                  <SelectButton onClick={() => handleSelectFood(food)} disabled={gameState === "start"}>
+                  <SelectButton
+                    onClick={() => handleSelectFood(food)}
+                    disabled={gameState === "start"}
+                  >
                     {isFoodSelected(food.id) ? "Selected" : "Select"}
                   </SelectButton>
                 </FoodCard>
               ))}
             </FoodGrid>
 
-            {gameState === "start" && <GameButton onClick={handleStartGame}>Start Game</GameButton>}
+            {gameState === "start" && (
+              <GameButton onClick={handleStartGame}>Start Game</GameButton>
+            )}
 
-            {gameState === "selecting" && <GameButton onClick={handleContinue}>Continue</GameButton>}
+            {gameState === "selecting" && (
+              <GameButton onClick={handleContinue}>Continue</GameButton>
+            )}
           </GamePanel>
 
           <MealsPanel>
@@ -660,7 +683,9 @@ const EatSmartGame: React.FC = () => {
 
             {selectedFoods.length === 0 ? (
               <EmptyState>
-                {gameState === "start" ? "Start the game to select meals" : "still haven't add anything"}
+                {gameState === "start"
+                  ? "Start the game to select meals"
+                  : "still haven't add anything"}
               </EmptyState>
             ) : (
               <>
@@ -669,7 +694,10 @@ const EatSmartGame: React.FC = () => {
                     <MealItem key={food.id}>
                       <MealImage>
                         <Image
-                          src={foodItems.find((item) => item.id === food.id)?.image || ""}
+                          src={
+                            foodItems.find((item) => item.id === food.id)
+                              ?.image || ""
+                          }
                           alt={food.name}
                           fill
                           style={{ objectFit: "cover" }}
@@ -700,10 +728,17 @@ const EatSmartGame: React.FC = () => {
         <ResultOverlay>
           <ResultCard>
             <ResultImage>
-              <Image src="/images/Congratulations.jpg" alt="Success" fill style={{ objectFit: "contain" }} />
+              <Image
+                src="/images/Congratulations.jpg"
+                alt="Success"
+                fill
+                style={{ objectFit: "contain" }}
+              />
             </ResultImage>
             <ResultTitle>Congratulations!</ResultTitle>
-            <ResultText>Enjoy guilt-free dining with our low calorie, free foods!</ResultText>
+            <ResultText>
+              Enjoy guilt-free dining with our low calorie, free foods!
+            </ResultText>
             <StarRating>{renderStars(gameScore)}</StarRating>
             <ResultButton onClick={handleNewGame}>Next</ResultButton>
             <BackLink onClick={handleBack}>Back</BackLink>
@@ -716,10 +751,17 @@ const EatSmartGame: React.FC = () => {
         <ResultOverlay>
           <ResultCard>
             <ResultImage>
-              <Image src="/images/try.jpg" alt="Try Again" fill style={{ objectFit: "contain" }} />
+              <Image
+                src="/images/try.jpg"
+                alt="Try Again"
+                fill
+                style={{ objectFit: "contain" }}
+              />
             </ResultImage>
             <ResultTitle>We are sorry!</ResultTitle>
-            <ResultText>Let&#39;s try again—you&#39;ve picked foods packed with calories!</ResultText>
+            <ResultText>
+              Let&#39;s try again—you&#39;ve picked foods packed with calories!
+            </ResultText>
             <StarRating>{renderStars(gameScore)}</StarRating>
             <ResultButton onClick={handleTryAgain}>Try Again</ResultButton>
             <BackLink onClick={handleBack}>Back</BackLink>
@@ -727,8 +769,7 @@ const EatSmartGame: React.FC = () => {
         </ResultOverlay>
       )}
     </PageContainer>
-  )
-}
+  );
+};
 
-export default EatSmartGame
-
+export default EatSmartGame;

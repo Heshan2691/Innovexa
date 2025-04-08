@@ -728,7 +728,7 @@ export default function ViewInsights() {
         const startDate = new Date();
         startDate.setDate(endDate.getDate() - 30);
 
-        const healthResponse = await api.get("/health-data", {
+        const healthResponse = await api.get("/users/health-data", {
           params: {
             startDate: startDate.toISOString(),
             endDate: endDate.toISOString(),
@@ -736,7 +736,7 @@ export default function ViewInsights() {
         });
         setHealthData(healthResponse.data);
 
-        const mealsResponse = await api.get("/meals/saved");
+        const mealsResponse = await api.get("/users/saved");
         setMeals(mealsResponse.data);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to fetch data");
