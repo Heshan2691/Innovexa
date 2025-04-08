@@ -362,7 +362,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../../atoms/Button"; // Assuming this is your Button atom
 import MealIdeasCard from "../../molecules/MealIdeasCard"; // Assuming this is your MealIdeasCard molecule
+import Sidebar from "../../molecules/sidebar"; // Assuming this is your Sidebar molecule
 import Link from "next/link"; // Assuming you're using Next.js for routing
+import Navbar from "../../components/Navbar"; // Assuming this is your Navbar component
 export default function DietPlanner() {
   const [startDate, setStartDate] = useState("");
   const [diet, setDiet] = useState("");
@@ -510,67 +512,15 @@ export default function DietPlanner() {
       style={{
         display: "flex",
         minHeight: "100vh",
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "#fff",
       }}
     >
       {/* Sidebar */}
-      <div
-        style={{
-          width: "250px",
-          backgroundColor: "#1a3c5e",
-          color: "#fff",
-          padding: "30px 20px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "30px",
-        }}
-      >
-        <div style={{ textAlign: "center" }}>
-          <img
-            src="https://via.placeholder.com/50"
-            alt="User Avatar"
-            style={{ borderRadius: "50%", marginBottom: "15px" }}
-          />
-          <h3 style={{ margin: "0", fontSize: "18px" }}>John Doe</h3>
-          <p style={{ margin: "8px 0", fontSize: "14px" }}>weight: 70kg</p>
-          <p style={{ margin: "8px 0", fontSize: "14px" }}>height: 170cm</p>
-        </div>
-
-        <nav>
-          <ul style={{ listStyle: "none", padding: "0", margin: "0" }}>
-            {[
-              "Dashboard",
-              "Log Food",
-              "View Insights",
-              "Track Progress",
-              "Diet Planner",
-              "My Diet",
-            ].map((item) => (
-              <li key={item} style={{ marginBottom: "20px" }}>
-                <a
-                  href="#"
-                  style={{
-                    color: "#fff",
-                    textDecoration: "none",
-                    fontSize: "16px",
-                    opacity: item === "Diet Planner" ? 1 : 0.7,
-                    transition: "opacity 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => (e.target.style.opacity = 1)}
-                  onMouseLeave={(e) =>
-                    (e.target.style.opacity = item === "Diet Planner" ? 1 : 0.7)
-                  }
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
+      <Sidebar />
 
       {/* Main Content */}
       <div style={{ flex: 1, padding: "40px" }}>
+        <Navbar />
         <h2 style={{ fontSize: "28px", marginBottom: "12px", color: "#333" }}>
           My Diet Planner
         </h2>

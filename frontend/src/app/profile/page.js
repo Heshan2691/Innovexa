@@ -261,9 +261,10 @@ import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import { colors } from "../../styles/colors";
 import { fonts } from "../../styles/fonts";
+import Sidebar from "../../molecules/sidebar";
 
 const ProfileContainer = styled.div`
-  max-width: 520px;
+  max-width: full;
   margin: 60px auto;
   padding: 32px;
   background: rgba(255, 255, 255, 0.9);
@@ -478,136 +479,147 @@ export default function Profile() {
 
   return (
     <ProfileContainer>
-      <Title>Profile</Title>
-      <ProfileInfo>
-        <InfoItem>
-          <Label>Name:</Label>
-          <Value>{user.name}</Value>
-        </InfoItem>
-        <InfoItem>
-          <Label>Email:</Label>
-          <Value>{user.email}</Value>
-        </InfoItem>
-        <InfoItem>
-          <Label>Age:</Label>
-          <Value>{user.age || "Not set"}</Value>
-        </InfoItem>
-        <InfoItem>
-          <Label>Weight:</Label>
-          <Value>{user.weight || "Not set"} kg</Value>
-        </InfoItem>
-        <InfoItem>
-          <Label>Height:</Label>
-          <Value>{user.height || "Not set"} cm</Value>
-        </InfoItem>
-        <InfoItem>
-          <Label>Health Goals:</Label>
-          <Value>
-            {user.healthGoals.charAt(0).toUpperCase() +
-              user.healthGoals.slice(1).replace("-", " ")}
-          </Value>
-        </InfoItem>
-        <Button
-          variant="primary"
-          size="medium"
-          onClick={() => setIsEditing(!isEditing)}
-          style={{ marginTop: "20px", width: "100%" }}
-        >
-          {isEditing ? "Cancel" : "Edit Profile"}
-        </Button>
-      </ProfileInfo>
-
-      {isEditing && (
-        <FormSection>
-          {updateError && (
-            <Message
-              style={{
-                color: "#EF4444",
-                background: "rgba(255, 235, 235, 0.8)",
-              }}
-            >
-              {updateError}
-            </Message>
-          )}
-          {updateSuccess && (
-            <Message
-              style={{
-                color: colors.tertiary,
-                background: "rgba(235, 255, 245, 0.8)",
-              }}
-            >
-              {updateSuccess}
-            </Message>
-          )}
-          <form onSubmit={handleUpdate}>
-            <Input
-              label="Name"
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleChange}
-              state={updateError ? "error" : "default"}
-            />
-            <Input
-              label="Age"
-              placeholder="Enter your age"
-              value={formData.age}
-              onChange={(e) =>
-                setFormData({ ...formData, age: e.target.value })
-              }
-              state={updateError ? "error" : "default"}
-            />
-            <Input
-              label="Weight (kg)"
-              placeholder="Enter your weight"
-              value={formData.weight}
-              onChange={(e) =>
-                setFormData({ ...formData, weight: e.target.value })
-              }
-              state={updateError ? "error" : "default"}
-            />
-            <Input
-              label="Height (cm)"
-              placeholder="Enter your height"
-              value={formData.height}
-              onChange={(e) =>
-                setFormData({ ...formData, height: e.target.value })
-              }
-              state={updateError ? "error" : "default"}
-            />
-            <div style={{ marginBottom: "24px" }}>
-              <label
-                style={{
-                  display: "block",
-                  fontFamily: fonts.poppins.family,
-                  fontSize: "14px",
-                  color: colors.deepSlate,
-                  marginBottom: "6px",
-                }}
-              >
-                Health Goals
-              </label>
-              <Select
-                name="healthGoals"
-                value={formData.healthGoals}
-                onChange={handleChange}
-                disabled={updateLoading}
-              >
-                <option value="weight-loss">Weight Loss</option>
-                <option value="muscle-gain">Muscle Gain</option>
-                <option value="maintenance">Maintenance</option>
-              </Select>
-            </div>
+      <div
+        style={{
+          display: "flex",
+          minHeight: "100vh",
+          backgroundColor: "#f5f5f5",
+        }}
+      >
+        <Sidebar />
+        <div style={{ flex: 1, padding: "20px" }}>
+          <Title>Profile</Title>
+          <ProfileInfo>
+            <InfoItem>
+              <Label>Name:</Label>
+              <Value>{user.name}</Value>
+            </InfoItem>
+            <InfoItem>
+              <Label>Email:</Label>
+              <Value>{user.email}</Value>
+            </InfoItem>
+            <InfoItem>
+              <Label>Age:</Label>
+              <Value>{user.age || "Not set"}</Value>
+            </InfoItem>
+            <InfoItem>
+              <Label>Weight:</Label>
+              <Value>{user.weight || "Not set"} kg</Value>
+            </InfoItem>
+            <InfoItem>
+              <Label>Height:</Label>
+              <Value>{user.height || "Not set"} cm</Value>
+            </InfoItem>
+            <InfoItem>
+              <Label>Health Goals:</Label>
+              <Value>
+                {user.healthGoals.charAt(0).toUpperCase() +
+                  user.healthGoals.slice(1).replace("-", " ")}
+              </Value>
+            </InfoItem>
             <Button
               variant="primary"
-              size="large"
-              disabled={updateLoading}
-              style={{ width: "100%" }}
+              size="medium"
+              onClick={() => setIsEditing(!isEditing)}
+              style={{ marginTop: "20px", width: "100%" }}
             >
-              {updateLoading ? "Updating..." : "Update Profile"}
+              {isEditing ? "Cancel" : "Edit Profile"}
             </Button>
-          </form>
-        </FormSection>
-      )}
+          </ProfileInfo>
+
+          {isEditing && (
+            <FormSection>
+              {updateError && (
+                <Message
+                  style={{
+                    color: "#EF4444",
+                    background: "rgba(255, 235, 235, 0.8)",
+                  }}
+                >
+                  {updateError}
+                </Message>
+              )}
+              {updateSuccess && (
+                <Message
+                  style={{
+                    color: colors.tertiary,
+                    background: "rgba(235, 255, 245, 0.8)",
+                  }}
+                >
+                  {updateSuccess}
+                </Message>
+              )}
+              <form onSubmit={handleUpdate}>
+                <Input
+                  label="Name"
+                  placeholder="Enter your name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  state={updateError ? "error" : "default"}
+                />
+                <Input
+                  label="Age"
+                  placeholder="Enter your age"
+                  value={formData.age}
+                  onChange={(e) =>
+                    setFormData({ ...formData, age: e.target.value })
+                  }
+                  state={updateError ? "error" : "default"}
+                />
+                <Input
+                  label="Weight (kg)"
+                  placeholder="Enter your weight"
+                  value={formData.weight}
+                  onChange={(e) =>
+                    setFormData({ ...formData, weight: e.target.value })
+                  }
+                  state={updateError ? "error" : "default"}
+                />
+                <Input
+                  label="Height (cm)"
+                  placeholder="Enter your height"
+                  value={formData.height}
+                  onChange={(e) =>
+                    setFormData({ ...formData, height: e.target.value })
+                  }
+                  state={updateError ? "error" : "default"}
+                />
+                <div style={{ marginBottom: "24px" }}>
+                  <label
+                    style={{
+                      display: "block",
+                      fontFamily: fonts.poppins.family,
+                      fontSize: "14px",
+                      color: colors.deepSlate,
+                      marginBottom: "6px",
+                    }}
+                  >
+                    Health Goals
+                  </label>
+                  <Select
+                    name="healthGoals"
+                    value={formData.healthGoals}
+                    onChange={handleChange}
+                    disabled={updateLoading}
+                  >
+                    <option value="weight-loss">Weight Loss</option>
+                    <option value="muscle-gain">Muscle Gain</option>
+                    <option value="maintenance">Maintenance</option>
+                  </Select>
+                </div>
+                <Button
+                  variant="primary"
+                  size="large"
+                  disabled={updateLoading}
+                  style={{ width: "100%" }}
+                >
+                  {updateLoading ? "Updating..." : "Update Profile"}
+                </Button>
+              </form>
+            </FormSection>
+          )}
+        </div>
+      </div>
     </ProfileContainer>
   );
 }

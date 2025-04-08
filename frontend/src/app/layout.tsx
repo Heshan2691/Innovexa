@@ -1,7 +1,6 @@
 // app/layout.tsx
 import { Inter } from "next/font/google";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Footer from "../molecules/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +13,6 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
       <body className={inter.className}>
-        <Header />
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
       </body>

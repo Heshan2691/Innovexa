@@ -16,69 +16,37 @@ export default function Navbar() {
     <nav
       style={{
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "flex-end",
         alignItems: "center",
         padding: "10px 20px",
-        backgroundColor: "#007bff",
-        color: "#fff",
+        backgroundColor: "#fff",
+        color: "#007bff",
       }}
     >
-      <div>
-        <Link
-          href="/"
-          style={{ color: "#fff", textDecoration: "none", marginRight: "20px" }}
-        >
-          Home
-        </Link>
-        <Link
-          href="/diet-planner"
-          style={{ color: "#fff", textDecoration: "none", marginRight: "20px" }}
-        >
-          Diet Planner
-        </Link>
-        <Link
-          href="/meal-ideas"
-          style={{ color: "#fff", textDecoration: "none", marginRight: "20px" }}
-        >
-          Meal Ideas
-        </Link>
-        <Link
-          href="/meal-blogs"
-          style={{ color: "#fff", textDecoration: "none", marginRight: "20px" }}
-        >
-          Meal Blogs
-        </Link>
-        <Link
-          href="/add-data"
-          style={{ color: "#fff", textDecoration: "none", marginRight: "20px" }}
-        >
-          Add Data
-        </Link>
-        <Link
-          href="/view-insights"
-          style={{ color: "#fff", textDecoration: "none", marginRight: "20px" }}
-        >
-          View Insights
-        </Link>
-        <Link
-          href="/play-eatsmart"
-          style={{ color: "#fff", textDecoration: "none", marginRight: "20px" }}
-        >
-          Play EatSmart
-        </Link>
-      </div>
       <button
         onClick={handleLogout}
         style={{
-          padding: "5px 10px",
-          backgroundColor: "#fff",
-          color: "#007bff",
-          border: "none",
-          borderRadius: "4px",
+          padding: "10px 20px",
+          background: "#007bff",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+          color: "#fff",
+          borderRadius: "12px",
           cursor: "pointer",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+          transition: "all 0.3s ease",
+        }}
+        onMouseOver={(e) => {
+          e.currentTarget.style.background = "#007bff";
+          e.currentTarget.style.transform = "scale(1.05)";
+        }}
+        onMouseOut={(e) => {
+          e.currentTarget.style.background = "#007bff";
+          e.currentTarget.style.transform = "scale(1)";
         }}
       >
-        Logout
+        🚪 Logout
       </button>
     </nav>
   );

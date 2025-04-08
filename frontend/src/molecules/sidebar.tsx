@@ -422,10 +422,10 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Logo Image */}
       <LogoContainer>
         <Image
-          src="/images/logo2.jpg"
+          src="/images/logo1.jpg"
           alt="FoodLens Logo"
-          width={40}
-          height={40}
+          width={100}
+          height={100}
         />
       </LogoContainer>
 
