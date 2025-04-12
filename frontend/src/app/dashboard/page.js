@@ -52,7 +52,7 @@ export default function Dashboard() {
   const [userGoal, setUserGoal] = useState(null); // State for user goal
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [name, setUserName] = useState("John");
+  const [, setUserName] = useState("John");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -191,6 +191,12 @@ export default function Dashboard() {
 
     const waterConsumed = todayHealthData ? todayHealthData.waterIntake : 0;
     const waterTarget = 2000;
+
+
+    let statusColor = "#3b82f6";
+    if (progressPercentage < 50) statusColor = "#ef4444";
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    else if (progressPercentage < 75) statusColor = "#f59e0b";
 
 
     return (
@@ -560,6 +566,7 @@ export default function Dashboard() {
         });
         setMoodData([...moodData, { mood: selectedMood, date: today }]);
         setSelectedMood("");
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         setError("Failed to log mood", err);
       }

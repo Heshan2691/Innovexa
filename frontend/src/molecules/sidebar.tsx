@@ -14,7 +14,6 @@ import api from "../utils/api";
 const BORDER_COLOR = "rgba(255, 255, 255, 0.15)";
 const BORDER_COLOR_HOVER = "rgba(255, 255, 255, 0.3)";
 const BACKGROUND_HOVER = "rgba(255, 255, 255, 0.1)";
-const BACKGROUND_ACTIVE = "rgba(255, 255, 255, 0.15)";
 
 const SidebarContainer = styled.div`
   /* Layout */
@@ -83,15 +82,6 @@ const OnlineIndicator = styled.div`
   background-color: ${colors.tertiary};
   border: 2px solid ${colors.primary};
   border-radius: 50%;
-`;
-
-const UserName = styled.div`
-  /* Typography */
-  font-size: 18px;
-  font-weight: ${fonts.poppins.weights.semiBold};
-
-  /* Layout */
-  margin-bottom: 4px;
 `;
 
 const MembershipStatus = styled.div`
@@ -249,7 +239,7 @@ export default function Sidebar({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const [userName, setUserName] = useState(initialUserName);
+  const [, setUserName] = useState(initialUserName);
   const [height, setHeight] = useState(initialHeight);
   const [weight, setWeight] = useState(initialWeight);
   const [membershipStatus, setMembershipStatus] = useState(
@@ -281,7 +271,7 @@ export default function Sidebar({
     };
 
     fetchUserProfile();
-  }, []);
+  }, [initialHeight, initialMembershipStatus, initialUserName, initialWeight]);
 
   const handleLogout = async () => {
     try {
@@ -295,18 +285,19 @@ export default function Sidebar({
   };
 
   // Determine if a nav button is active based on the current pathname
-  const isActive = (page) => {
-    const routeMap = {
-      Dashboard: "/dashboard",
-      "Log Food": "/meal-ai",
-      "View Insights": "/view-insights",
-      "Track Me": "/add-data",
-      "Get Meal Ideas": "/meal-ideas",
-      "Play EatSmart": "/play-eatsmart",
-      "Plan Your Diet": "/diet-planner",
-      "Our Blog": "/meal-blogs",
-      Profile: "/profile",
-    };
+  const routeMap = {
+    Dashboard: "/dashboard",
+    "Log Food": "/meal-ai",
+    "View Insights": "/view-insights",
+    "Track Me": "/add-data",
+    "Get Meal Ideas": "/meal-ideas",
+    "Play EatSmart": "/play-eatsmart",
+    "Plan Your Diet": "/diet-planner",
+    "Our Blog": "/meal-blogs",
+    Profile: "/profile",
+  };
+
+  const isActive = (page: keyof typeof routeMap) => {
     return pathname === routeMap[page];
   };
 
