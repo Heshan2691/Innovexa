@@ -408,7 +408,7 @@ export default function Profile() {
         const decodedToken = JSON.parse(atob(token.split(".")[1]));
         const userId = decodedToken.id;
         const response = await axios.get(
-          `http://localhost:5000/api/users/${userId}`,
+          process.env.NEXT_PUBLIC_URL + `/users/${userId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setUser(response.data);
@@ -444,7 +444,7 @@ export default function Profile() {
       const userId = decodedToken.id;
 
       const response = await axios.put(
-        `http://localhost:5000/api/users/${userId}`,
+        process.env.NEXT_PUBLIC_URL + `/users/${userId}`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

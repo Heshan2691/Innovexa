@@ -197,6 +197,7 @@ export default function Login() {
     try {
       setLoading(true);
       setError("");
+
       setSuccess("");
 
       const response = await api.post("/users/login", {

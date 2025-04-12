@@ -270,6 +270,7 @@ export default function Register() {
     try {
       setLoading(true);
       setError("");
+
       setSuccess("");
 
       const response = await api.post("/users/register", formData);

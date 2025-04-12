@@ -129,7 +129,7 @@ export default function MealIdeas() {
         }
 
         const response = await axios.get(
-          "http://localhost:5000/api/recipes/healthy",
+          process.env.NEXT_PUBLIC_URL + "/recipes/healthy",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
