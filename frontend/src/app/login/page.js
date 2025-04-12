@@ -174,7 +174,7 @@ export default function Login() {
       setLoading(true);
       setError("");
       const response = await axios.post(
-        "http://localhost:5000/api/users/login",
+        process.env.NEXT_PUBLIC_URL + "/users/login",
         {
           email,
           password,
