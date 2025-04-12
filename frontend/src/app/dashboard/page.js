@@ -180,8 +180,6 @@ export default function Dashboard() {
     );
   };
 
-  // Water Intake Component
-// Water Intake Component
   const WaterIntake = () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -189,26 +187,29 @@ export default function Dashboard() {
       const dataDate = new Date(data.date);
       return dataDate.toDateString() === today.toDateString();
     });
-
+  
     const waterConsumed = todayHealthData ? todayHealthData.waterIntake : 0;
     const waterTarget = 2000;
-
+  
     const progressPercentage = Math.min(100, (waterConsumed / waterTarget) * 100);
-
+  
     let statusColor = "#3b82f6";
     if (progressPercentage < 50) statusColor = "#ef4444";
     else if (progressPercentage < 75) statusColor = "#f59e0b";
-
+  
     return (
       <div
-        style={{ ...statCardStyle, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
+        style={{
+          ...statCardStyle,
+          backgroundColor: `${statusColor}20`, // Use statusColor here
+        }}
       >
         <div style={{ fontSize: "24px", marginBottom: "8px" }}>💧</div>
         <p
           style={{
             fontSize: "32px",
             fontWeight: "700",
-            color: "#3b82f6",
+            color: statusColor, // Use statusColor here
             marginBottom: "4px",
           }}
         >
