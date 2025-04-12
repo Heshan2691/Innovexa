@@ -5,7 +5,13 @@ import styled from "styled-components";
 import { colors } from "../styles/colors";
 import { fonts } from "../styles/fonts";
 
-const StyledButton = styled.button`
+interface StyledButtonProps {
+  $size?: "small" | "medium" | "large";
+  $variant?: "primary" | "secondary" | "tertiary";
+  disabled?: boolean;
+}
+
+const StyledButton = styled.button<StyledButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,6 +131,15 @@ const StyledButton = styled.button`
     `}
 `;
 
+interface ButtonProps {
+  variant?: "primary" | "secondary" | "tertiary";
+  size?: "small" | "medium" | "large";
+  children: React.ReactNode;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
+  [key: string]: unknown;
+}
+
 export default function Button({
   variant = "primary",
   size = "medium",
@@ -132,7 +147,7 @@ export default function Button({
   onClick,
   disabled = false,
   ...props
-}) {
+}: ButtonProps) {
   return (
     <StyledButton
       $variant={variant}
