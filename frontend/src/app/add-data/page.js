@@ -22,7 +22,6 @@ export default function AddData() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Fetch saved meals on component mount
   useEffect(() => {
     const fetchSavedMeals = async () => {
       try {
@@ -37,7 +36,10 @@ export default function AddData() {
       }
     };
 
-    fetchSavedMeals();
+    // Only fetch if we're on the client side
+    if (typeof window !== 'undefined') {
+      fetchSavedMeals();
+    }
   }, []);
 
   // Handle health form input changes

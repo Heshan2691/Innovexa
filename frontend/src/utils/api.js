@@ -1,13 +1,21 @@
 import axios from "axios";
-const token = localStorage.getItem("token");
 
-// Create an Axios instance with the base URL of the backend
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_URL, // Adjust this if your backend runs on a different port or domain
+  baseURL: process.env.NEXT_PUBLIC_URL,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
   },
 });
+
+// Add an interceptor to include the token in requests
+if (typeof window !== 'undefined') {  // Check if we're on the client side
+  api.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  });
+}
 
 export default api;
