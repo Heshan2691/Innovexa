@@ -566,7 +566,6 @@ export default function Dashboard() {
         });
         setMoodData([...moodData, { mood: selectedMood, date: today }]);
         setSelectedMood("");
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         setError("Failed to log mood", err);
       }
@@ -841,7 +840,7 @@ export default function Dashboard() {
                 marginBottom: "8px",
               }}
             >
-              Welcome back {`${name}`}!
+              Welcome back!
             </h1>
             <p style={{ color: "#6b7280", fontSize: "16px" }}>
               {new Date().toLocaleDateString("en-US", {
