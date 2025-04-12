@@ -1,4 +1,7 @@
+# Node.js
 node_modules/
 .env
+
+# Build artifacts
 dist/
 build/

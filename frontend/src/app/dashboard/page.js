@@ -191,15 +191,13 @@ export default function Dashboard() {
 
     const waterConsumed = todayHealthData ? todayHealthData.waterIntake : 0;
     const waterTarget = 2000;
-    const progressPercentage = Math.min(
-      100,
-      (waterConsumed / waterTarget) * 100
-    );
+
 
     let statusColor = "#3b82f6";
     if (progressPercentage < 50) statusColor = "#ef4444";
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     else if (progressPercentage < 75) statusColor = "#f59e0b";
+
 
     return (
       <div
@@ -570,7 +568,7 @@ export default function Dashboard() {
         setSelectedMood("");
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
-        setError("Failed to log mood");
+        setError("Failed to log mood", err);
       }
     };
 
@@ -843,7 +841,7 @@ export default function Dashboard() {
                 marginBottom: "8px",
               }}
             >
-              Welcome back!
+              Welcome back {`${name}`}!
             </h1>
             <p style={{ color: "#6b7280", fontSize: "16px" }}>
               {new Date().toLocaleDateString("en-US", {

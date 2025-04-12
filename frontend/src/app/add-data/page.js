@@ -679,6 +679,7 @@ import { useState, useEffect } from "react";
 import api from "../../utils/api";
 import Navbar from "../../components/Navbar";
 import Sidebar from "../../molecules/sidebar";
+import Link from "next/link";
 
 export default function AddData() {
   const [healthForm, setHealthForm] = useState({
@@ -695,7 +696,6 @@ export default function AddData() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [userName, setUserName] = useState("John");
 
   // Fetch saved meals on component mount
   useEffect(() => {
@@ -749,14 +749,14 @@ export default function AddData() {
 
     try {
       setLoading(true);
-      const response = await api.post("/health-data", {
-        bmi: Number.parseFloat(bmi),
-        waterIntake: Number.parseInt(healthForm.waterIntake),
-        sleepTime: Number.parseFloat(healthForm.sleepTime),
-        steps: Number.parseInt(healthForm.steps),
-        caloriesBurned: Number.parseInt(healthForm.caloriesBurned),
-        weight: Number.parseFloat(healthForm.weight),
-      });
+      // const response = await api.post("/health-data", {
+      //   bmi: Number.parseFloat(bmi),
+      //   waterIntake: Number.parseInt(healthForm.waterIntake),
+      //   sleepTime: Number.parseFloat(healthForm.sleepTime),
+      //   steps: Number.parseInt(healthForm.steps),
+      //   caloriesBurned: Number.parseInt(healthForm.caloriesBurned),
+      //   weight: Number.parseFloat(healthForm.weight),
+      // });
 
       setSuccess("Health data added successfully!");
       // Reset form
@@ -1686,7 +1686,7 @@ export default function AddData() {
                   >
                     No saved meals available.
                   </p>
-                  <a
+                  <Link
                     href="/meal-ideas"
                     style={{
                       color: "#2563eb",
@@ -1707,7 +1707,7 @@ export default function AddData() {
                     }}
                   >
                     Add meals via the Meal Ideas page
-                  </a>
+                  </Link>
                 </div>
               )}
             </div>
