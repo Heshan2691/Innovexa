@@ -11,6 +11,21 @@ export const registerUser = async (req, res) => {
     const { name, email, password, age, weight, height, healthGoals } =
       req.body;
 
+    // Input validation
+    if (!name || !email || !password || !age || !weight || !height) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
+    }
+
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 6 characters long" });
+    }
+
     // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -42,7 +57,7 @@ export const registerUser = async (req, res) => {
     res.status(201).json({ token, user: { id: user._id, name, email } });
   } catch (error) {
     console.error("Error registering user:", error);
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
@@ -50,6 +65,17 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    // Input validation
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ message: "Email and password are required" });
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
+    }
 
     // Check if user exists
     const user = await User.findOne({ email });
@@ -71,7 +97,7 @@ export const loginUser = async (req, res) => {
     res.json({ token, user: { id: user._id, name: user.name, email } });
   } catch (error) {
     console.error("Error logging in user:", error);
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
@@ -84,6 +110,7 @@ export const getUserProfile = async (req, res) => {
     }
     res.status(200).json(user);
   } catch (error) {
+    console.error("Error fetching user profile:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
@@ -137,7 +164,7 @@ export const getMoodData = async (req, res) => {
     }
 
     const moodData = await Mood.find({
-      userId: userId, // Update to use userId instead of user
+      user: userId, // Fixed: Changed userId to user to match typical schema
       date: { $gte: new Date(startDate), $lte: new Date(endDate) },
     });
 
@@ -151,20 +178,20 @@ export const getMoodData = async (req, res) => {
 export const getUserGoal = async (req, res) => {
   try {
     const userId = req.user.id;
-    const user = await User.findById(userId).select("healthGoals"); // Update to healthGoals
+    const user = await User.findById(userId).select("healthGoals");
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
     // Map the enum value to a user-friendly string
     const goalMap = {
-      "weight-loss": "Lose weight",
-      "muscle-gain": "Gain muscle",
-      maintenance: "Maintain health",
+      "weight-loss": "Lose Weight",
+      "muscle-gain": "Gain Muscle",
+      maintenance: "Maintain Health",
     };
     const userFriendlyGoal = goalMap[user.healthGoals] || "No goal set";
 
-    res.status(200).json(userFriendlyGoal);
+    res.status(200).json({ goal: userFriendlyGoal });
   } catch (error) {
     console.error("Error fetching user goal:", error);
     res.status(500).json({ message: "Server error", error: error.message });

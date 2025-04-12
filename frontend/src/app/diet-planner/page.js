@@ -388,7 +388,7 @@ export default function DietPlanner() {
         }
 
         const response = await axios.get(
-          "http://localhost:5000/api/diet-plans",
+          process.env.NEXT_PUBLIC_URL + "/diet-plans",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -417,7 +417,7 @@ export default function DietPlanner() {
         throw new Error("Please log in to generate a diet plan");
       }
       const response = await axios.post(
-        "http://localhost:5000/api/diet-plans/generate",
+        process.env.NEXT_PUBLIC_URL + "/diet-plans/generate",
         { startDate, diet, exclude },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -445,7 +445,7 @@ export default function DietPlanner() {
         throw new Error("Please log in to regenerate a diet plan");
       }
       const response = await axios.put(
-        `http://localhost:5000/api/diet-plans/regenerate/${planId}/${dayNumber}`,
+        process.env.NEXT_PUBLIC_URL + `/diet-plans/regenerate/${planId}/${dayNumber}`,
         { diet, exclude },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -52,7 +52,7 @@ export default function Dashboard() {
   const [userGoal, setUserGoal] = useState(null); // State for user goal
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [userName, setUserName] = useState("John");
+  const [name, setUserName] = useState("John");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -841,7 +841,7 @@ export default function Dashboard() {
                 marginBottom: "8px",
               }}
             >
-              Good Morning, {userName}
+              Welcome back!
             </h1>
             <p style={{ color: "#6b7280", fontSize: "16px" }}>
               {new Date().toLocaleDateString("en-US", {
