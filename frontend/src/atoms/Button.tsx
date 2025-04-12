@@ -1,4 +1,3 @@
-// components/Button.tsx
 "use client";
 
 import React from "react";
@@ -6,15 +5,7 @@ import styled from "styled-components";
 import { colors } from "../styles/colors";
 import { fonts } from "../styles/fonts";
 
-interface ButtonProps {
-  variant?: "primary" | "secondary" | "tertiary";
-  size?: "small" | "medium" | "large";
-  children: React.ReactNode;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  disabled?: boolean;
-}
-
-const StyledButton = styled.button<ButtonProps>`
+const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,8 +15,8 @@ const StyledButton = styled.button<ButtonProps>`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
-  ${({ size }) => {
-    switch (size) {
+  ${({ $size }) => {
+    switch ($size) {
       case "small":
         return `
           width: 120px;
@@ -53,8 +44,8 @@ const StyledButton = styled.button<ButtonProps>`
     }
   }}
 
-  ${({ variant }) => {
-    switch (variant) {
+  ${({ $variant }) => {
+    switch ($variant) {
       case "primary":
         return `
           border: 2px solid ${colors.secondary};
@@ -134,23 +125,23 @@ const StyledButton = styled.button<ButtonProps>`
     `}
 `;
 
-const Button: React.FC<ButtonProps> = ({
+export default function Button({
   variant = "primary",
   size = "medium",
   children,
   onClick,
   disabled = false,
-}) => {
+  ...props
+}) {
   return (
     <StyledButton
-      variant={variant}
-      size={size}
+      $variant={variant}
+      $size={size}
       onClick={onClick}
       disabled={disabled}
+      {...props}
     >
       {children}
     </StyledButton>
   );
-};
-
-export default Button;
+}

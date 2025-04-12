@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import Button from "../../atoms/Button";
 import { colors } from "../../styles/colors";
 import { fonts } from "../../styles/fonts";
+import api from "../../utils/api";
 
 // Modern Input Component with Floating Label
 const InputWrapper = styled.div`
@@ -73,7 +73,7 @@ const LoginContainer = styled.div`
 
 const Sidebar = styled.div`
   width: 30%;
-  background-color: ${colors.primary}; /* Dark blue from the image */
+  background-color: #1a3c5e; /* Dark blue from the image */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -143,6 +143,17 @@ const ErrorMessage = styled.p`
   border-radius: 4px;
 `;
 
+const SuccessMessage = styled.p`
+  color: #47b881;
+  font-family: ${fonts.poppins.family};
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 24px;
+  background: rgba(231, 245, 237, 0.8);
+  padding: 8px;
+  border-radius: 4px;
+`;
+
 const RegisterLink = styled.p`
   text-align: center;
   font-family: ${fonts.poppins.family};
@@ -166,22 +177,41 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    // Basic client-side validation
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
     try {
       setLoading(true);
       setError("");
-      const response = await axios.post(
-        "http://localhost:5000/api/users/login",
-        {
-          email,
-          password,
-        }
-      );
-      localStorage.setItem("token", response.data.token);
-      router.push("/dashboard");
+      setSuccess("");
+
+      const response = await api.post("/users/login", {
+        email,
+        password,
+      });
+
+      const { token } = response.data;
+      localStorage.setItem("token", token);
+      setSuccess("Login successful! Redirecting...");
+
+      // Redirect after a short delay to show the success message
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1000);
     } catch (err) {
       setError(err.response?.data?.message || "Invalid credentials");
     } finally {
@@ -193,15 +223,17 @@ export default function Login() {
     <LoginContainer>
       <Sidebar>
         <Logo>
-          <svg width="500" height="240" xmlns="http://www.w3.org/2000/svg">
-            <image href="/logo1.png" width="500" height="240" />
-          </svg>
+          <LogoText>
+            FOOD <span>LENS</span>
+          </LogoText>
         </Logo>
+        <Tagline>Healthy Life</Tagline>
       </Sidebar>
       <FormContainer>
         <FormWrapper>
           <Title>Welcome to FoodLens</Title>
           {error && <ErrorMessage>{error}</ErrorMessage>}
+          {success && <SuccessMessage>{success}</SuccessMessage>}
           <form onSubmit={handleLogin}>
             <InputWrapper>
               <StyledInput
@@ -232,6 +264,7 @@ export default function Login() {
             <Button
               variant="primary"
               size="large"
+              type="submit"
               disabled={loading}
               style={{ width: "100%" }}
             >
