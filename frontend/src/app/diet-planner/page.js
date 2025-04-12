@@ -373,7 +373,8 @@ export default function DietPlanner() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [isFallback, setIsFallback] = useState(false);
-  const [currentPlanId, setCurrentPlanId] = useState(null);
+  // Removed unused currentPlanId state variable
+
 
   const placeholderImage =
     "https://via.placeholder.com/300x150?text=No+Image+Available";
@@ -396,7 +397,7 @@ export default function DietPlanner() {
 
         if (response.data.dietPlans && response.data.dietPlans.length > 0) {
           setDietPlans(response.data.dietPlans);
-          setCurrentPlanId(response.data.dietPlans[0].planId);
+          // Removed setting currentPlanId as it is unused
         }
       } catch (err) {
         console.error("Error fetching diet plans:", err);

@@ -235,7 +235,7 @@ interface BMICalculatorProps {
 }
 
 // BMI Calculator Component
-const BMICalculator: React.FC = () => {
+const BMICalculator: React.FC<BMICalculatorProps> = ({ onBmiCalculated }) => {
   const [weight, setWeight] = useState(65);
   const [age, setAge] = useState(26);
   const [height, setHeight] = useState(170);
