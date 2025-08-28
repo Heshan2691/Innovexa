@@ -76,14 +76,14 @@ export default function AddData() {
 
     try {
       setLoading(true);
-      // const response = await api.post("/health-data", {
-      //   bmi: Number.parseFloat(bmi),
-      //   waterIntake: Number.parseInt(healthForm.waterIntake),
-      //   sleepTime: Number.parseFloat(healthForm.sleepTime),
-      //   steps: Number.parseInt(healthForm.steps),
-      //   caloriesBurned: Number.parseInt(healthForm.caloriesBurned),
-      //   weight: Number.parseFloat(healthForm.weight),
-      // });
+      const response = await api.post("/health-data", {
+        bmi: Number.parseFloat(bmi),
+        waterIntake: Number.parseInt(healthForm.waterIntake),
+        sleepTime: Number.parseFloat(healthForm.sleepTime),
+        steps: Number.parseInt(healthForm.steps),
+        caloriesBurned: Number.parseInt(healthForm.caloriesBurned),
+        weight: Number.parseFloat(healthForm.weight),
+      });
 
       setSuccess("Health data added successfully!");
       // Reset form

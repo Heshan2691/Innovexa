@@ -9,6 +9,7 @@ import { colors } from "../styles/colors";
 import { fonts } from "../styles/fonts";
 import Button from "../atoms/Button";
 import api from "../utils/api";
+import { useAuth } from "../context/AuthContext";
 
 // Constants for repeated values
 const BORDER_COLOR = "rgba(255, 255, 255, 0.15)";
@@ -246,18 +247,41 @@ export default function Sidebar({
     initialMembershipStatus
   );
 
+  const {
+    isAuthenticated,
+    user: authUser,
+    logout: authLogout,
+    checkAuth,
+  } = useAuth();
+
   // Fetch user profile data on mount
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const token = localStorage.getItem("token");
-        if (!token) throw new Error("No token found");
+        // First check if we're authenticated using our context
+        if (!isAuthenticated) {
+          const isAuthed = await checkAuth();
+          if (!isAuthed) {
+            console.log("Not authenticated. Redirecting to login...");
+            router.push("/login");
+            return;
+          }
+        }
 
-        const response = await api.get("/users/profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        // If we already have user data in context, use it
+        if (authUser) {
+          setUserName(authUser.name || initialUserName);
+          setHeight(authUser.height || initialHeight);
+          setWeight(authUser.weight || initialWeight);
+          setMembershipStatus(
+            authUser.membershipStatus || initialMembershipStatus
+          );
+          return;
+        }
+
+        // Otherwise fetch from API
+        const response = await api.get("/users/profile");
+
         const userData = response.data;
         setUserName(userData.name || initialUserName);
         setHeight(userData.height || initialHeight);
@@ -267,17 +291,26 @@ export default function Sidebar({
         );
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
+        // API interceptor will handle 401
       }
     };
 
     fetchUserProfile();
-  }, [initialHeight, initialMembershipStatus, initialUserName, initialWeight]);
+  }, [
+    initialHeight,
+    initialMembershipStatus,
+    initialUserName,
+    initialWeight,
+    router,
+    isAuthenticated,
+    authUser,
+    checkAuth,
+  ]);
 
   const handleLogout = async () => {
     try {
-      await api.post("/auth/logout");
-      localStorage.removeItem("token");
-      router.push("/login");
+      // Use AuthContext logout function instead
+      authLogout();
     } catch (error) {
       console.error("Logout failed:", error);
       alert("Failed to log out. Please try again.");
